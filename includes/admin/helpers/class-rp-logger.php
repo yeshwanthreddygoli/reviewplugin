@@ -33,7 +33,7 @@ class RP_Logger {
 		$this->message( $msg, 'error' );
 	}
 
-	/
+	
 	public function notice( $msg = '' ) {
 		$this->message( $msg, 'notice' );
 	}
