@@ -32,7 +32,7 @@ class RP_Admin_Render_Controller {
 		}
 
 		if ( file_exists( RP_PATH . '/includes/admin/layouts/css/' . $name . '.css' ) ) {
-			wp_enqueue_style( $this->plugin_name . '-' . $name . '-css', RP_URL . '/includes/admin/layouts/css/' . $name . '.css', array(), $this->version );
+			wp_enqueue_style( $this->plugin_name . '-' . $name . '-css', '/includes/admin/layouts/css/' . $name . '.css', array(), $this->version );
 		}
 		include_once( RP_PATH . '/includes/admin/layouts/' . $name . '-tpl.php' );
 	}
