@@ -2,7 +2,7 @@
 /**
  *  Up-sell layout in the admin dashboard.
  *
- * @package     WPPR
+ * @package     RP
  * @subpackage  Admin
  * @copyright   Copyright (c) 2017, Marius Cristea
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
@@ -10,9 +10,9 @@
  */
 
 /**
- * Class WPPR_Editor
+ * Class RP_Editor
  */
-class WPPR_Editor {
+class RP_Editor {
 
 	/**
 	 * The ID of this plugin.
@@ -70,7 +70,7 @@ class WPPR_Editor {
 		}
 
 		add_meta_box(
-			'wppr_editor_metabox',
+			'rp_editor_metabox',
 			__( 'Product Review Extra Settings', 'wp-product-review' ),
 			array(
 				$this,
@@ -90,8 +90,8 @@ class WPPR_Editor {
 	 */
 	public function render_metabox( $post ) {
 		$editor = $this->get_editor_name( $post );
-		wp_nonce_field( 'wppr_editor_save.' . $post->ID, '_wppr_nonce' );
-		$render_controller = new WPPR_Admin_Render_Controller( $this->plugin_name, $this->version );
+		wp_nonce_field( 'rp_editor_save.' . $post->ID, '_rp_nonce' );
+		$render_controller = new RP_Admin_Render_Controller( $this->plugin_name, $this->version );
 		$render_controller->render_editor_metabox( $editor->get_template(), $editor );
 	}
 
@@ -103,14 +103,14 @@ class WPPR_Editor {
 	 *
 	 * @param   WP_Post $post The post object.
 	 *
-	 * @return WPPR_Editor_Abstract
+	 * @return RP_Editor_Abstract
 	 */
 	private function get_editor_name( $post ) {
-		$editor_name = 'WPPR_' . str_replace( '-', '_', ucfirst( $post->post_type ) . '_Editor' );
+		$editor_name = 'RP_' . str_replace( '-', '_', ucfirst( $post->post_type ) . '_Editor' );
 		if ( class_exists( $editor_name ) ) {
 			$editor = new $editor_name( $post );
 		} else {
-			$editor = new WPPR_Editor_Model( $post );
+			$editor = new RP_Editor_Model( $post );
 		}
 
 		return $editor;
@@ -133,10 +133,10 @@ class WPPR_Editor {
 				if ( isset( $assets['js'] ) ) {
 					foreach ( $assets['js'] as $handle => $data ) {
 						if ( isset( $data['path'] ) ) {
-							wp_enqueue_script( 'wppr-' . $handle . '-js', $data['path'], $data['required'], $this->version, true );
+							wp_enqueue_script( 'rp-' . $handle . '-js', $data['path'], $data['required'], $this->version, true );
 						}
 						if ( isset( $data['vars'] ) ) {
-							wp_localize_script( 'wppr-' . $handle . '-js', $handle . '_vars', $data['vars'] );
+							wp_localize_script( 'rp-' . $handle . '-js', $handle . '_vars', $data['vars'] );
 						}
 					}
 				}
@@ -144,7 +144,7 @@ class WPPR_Editor {
 				if ( isset( $assets['css'] ) ) {
 					foreach ( $assets['css'] as $handle => $data ) {
 						if ( isset( $data['path'] ) ) {
-							wp_enqueue_style( 'wppr-' . $handle . '-css', $data['path'], $data['required'], $this->version );
+							wp_enqueue_style( 'rp-' . $handle . '-css', $data['path'], $data['required'], $this->version );
 						}
 					}
 				}
@@ -165,8 +165,8 @@ class WPPR_Editor {
 
 		$is_autosave    = wp_is_post_autosave( $post_id );
 		$is_revision    = wp_is_post_revision( $post_id );
-		$nonce          = isset( $_REQUEST['_wppr_nonce'] ) ? $_REQUEST['_wppr_nonce'] : '';
-		$is_valid_nonce = wp_verify_nonce( $nonce, 'wppr_editor_save.' . $post_id );
+		$nonce          = isset( $_REQUEST['_rp_nonce'] ) ? $_REQUEST['_rp_nonce'] : '';
+		$is_valid_nonce = wp_verify_nonce( $nonce, 'rp_editor_save.' . $post_id );
 
 		if ( $is_autosave || $is_revision || ! $is_valid_nonce ) {
 			return;
@@ -174,9 +174,9 @@ class WPPR_Editor {
 
 		// check if this is a review post type. If it is, then make comment_status as 'open' (but override with a filter) so that
 		// comments can be addeded to this. If this is not done, then review comment feature will not show the ability to add rating in the comment section.
-		if ( 'wppr_review' === get_post_type( $post_id ) ) {
+		if ( 'rp_review' === get_post_type( $post_id ) ) {
 			remove_action( 'save_post', array( $this, 'editor_save' ) );
-			wp_update_post( array( 'ID' => $post_id, 'comment_status' => apply_filters( 'wppr_cpt_comment_status', 'open' ) ) );
+			wp_update_post( array( 'ID' => $post_id, 'comment_status' => apply_filters( 'rp_cpt_comment_status', 'open' ) ) );
 			add_action( 'save_post', array( $this, 'editor_save' ) );
 		}
 

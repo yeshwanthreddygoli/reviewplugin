@@ -1,15 +1,5 @@
 <?php
-/**
- *  Widget layout for the admin dashboard.
- *
- * @package     WPPR
- * @subpackage  Layouts
- * @copyright   Copyright (c) 2017, Bogdan Preda
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since       3.0.0
- */
 
-// @codingStandardsIgnoreStart
 ?>
 <p>
 	<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'wp-product-review' ); ?></label>
@@ -21,11 +11,11 @@
 </p>
 
 <?php
-	if ( 'wppr_top_reviews_widget' === $this->id_base ) {
+	if ( 'rp_top_reviews_widget' === $this->id_base ) {
 ?>
 <p>
 <label for="<?php echo $this->get_field_id( 'cwp_tp_post_types' ); ?>"><?php _e( 'Post Type:', 'wp-product-review' ); ?></label>
-<select id="<?php echo $this->get_field_id( 'cwp_tp_post_types' ); ?>" name="<?php echo $this->get_field_name( 'cwp_tp_post_types' ); ?>[]" class="wppr-chosen wppr-post-type" data-wppr-cat-combo="<?php echo $this->get_field_id( 'cwp_tp_category' ); ?>" >
+<select id="<?php echo $this->get_field_id( 'cwp_tp_post_types' ); ?>" name="<?php echo $this->get_field_name( 'cwp_tp_post_types' ); ?>[]" class="rp-chosen rp-post-type" data-rp-cat-combo="<?php echo $this->get_field_id( 'cwp_tp_category' ); ?>" >
 <?php
 foreach( get_post_types( '', 'objects' ) as $post_type ) {
 	?>
@@ -40,7 +30,7 @@ foreach( get_post_types( '', 'objects' ) as $post_type ) {
 ?>
 <p>
 <label for="<?php echo $this->get_field_id( 'cwp_tp_post_types' ); ?>"><?php _e( 'Post Types:', 'wp-product-review' ); ?></label>
-<select id="<?php echo $this->get_field_id( 'cwp_tp_post_types' ); ?>" name="<?php echo $this->get_field_name( 'cwp_tp_post_types' ); ?>[]" class="wppr-chosen wppr-post-types" data-wppr-cat-combo="<?php echo $this->get_field_id( 'cwp_tp_category' ); ?>" multiple>
+<select id="<?php echo $this->get_field_id( 'cwp_tp_post_types' ); ?>" name="<?php echo $this->get_field_name( 'cwp_tp_post_types' ); ?>[]" class="rp-chosen rp-post-types" data-rp-cat-combo="<?php echo $this->get_field_id( 'cwp_tp_category' ); ?>" multiple>
 <?php
 foreach( get_post_types( '', 'objects' ) as $post_type ) {
 	?>
@@ -55,15 +45,15 @@ foreach( get_post_types( '', 'objects' ) as $post_type ) {
 ?>
 
 <?php
-	$category_heading = 'wppr_top_reviews_widget' === $this->id_base ? __( 'Taxonomy:', 'wp-product-review' ) : __( 'Category:', 'wp-product-review' ) ;
+	$category_heading = 'rp_top_reviews_widget' === $this->id_base ? __( 'Taxonomy:', 'wp-product-review' ) : __( 'Category:', 'wp-product-review' ) ;
 ?>
 
 <p>
 	<?php $all_cats = isset( $instance['cwp_tp_all_categories'] ) ? $instance['cwp_tp_all_categories'] : ''; ?>
 	<label for="<?php echo $this->get_field_id( 'cwp_tp_category' ); ?>"><?php echo $category_heading; ?></label>
-	<select id="<?php echo $this->get_field_id( 'cwp_tp_category' ); ?>" name="<?php echo $this->get_field_name( 'cwp_tp_category' ); ?>" class="wppr-chosen wppr-cats">
+	<select id="<?php echo $this->get_field_id( 'cwp_tp_category' ); ?>" name="<?php echo $this->get_field_name( 'cwp_tp_category' ); ?>" class="rp-chosen rp-cats">
 <?php
-	if ( 'wppr_top_reviews_widget' !== $this->id_base ) {
+	if ( 'rp_top_reviews_widget' !== $this->id_base ) {
 ?>
 <option>All</option>
 <?php
@@ -87,19 +77,19 @@ foreach( get_post_types( '', 'objects' ) as $post_type ) {
 			}
 		?>
 	</select>
-	<div class="spinner wppr-cat-spinner"></div>
+	<div class="spinner rp-cat-spinner"></div>
 </p>
 
 <?php
-	if ( 'wppr_top_reviews_widget' === $this->id_base ) {
+	if ( 'rp_top_reviews_widget' === $this->id_base ) {
 	$from	= $instance['cwp_timespan_from'];
 	$to		= $instance['cwp_timespan_to'];
 ?>
 <p>
 <label for="<?php echo $this->get_field_id( 'cwp_timespan_from' ); ?>"><?php _e( 'Posts published between:', 'wp-product-review' ); ?></label>
 <br/>
-<input type="text" id="<?php echo $this->get_field_id( 'cwp_timespan_from' ); ?>" class="wppr-datepicker" name="<?php echo $this->get_field_name( 'cwp_timespan_from' ); ?>" value="<?php echo $from; ?>" size="10">
-<input type="text" id="<?php echo $this->get_field_id( 'cwp_timespan_to' ); ?>" class="wppr-datepicker" name="<?php echo $this->get_field_name( 'cwp_timespan_to' ); ?>" value="<?php echo $to; ?>" size="10">
+<input type="text" id="<?php echo $this->get_field_id( 'cwp_timespan_from' ); ?>" class="rp-datepicker" name="<?php echo $this->get_field_name( 'cwp_timespan_from' ); ?>" value="<?php echo $from; ?>" size="10">
+<input type="text" id="<?php echo $this->get_field_id( 'cwp_timespan_to' ); ?>" class="rp-datepicker" name="<?php echo $this->get_field_name( 'cwp_timespan_to' ); ?>" value="<?php echo $to; ?>" size="10">
 <br/>
 </p>
 <?php
@@ -119,10 +109,10 @@ foreach( get_post_types( '', 'objects' ) as $post_type ) {
 ?>
 <p>
 <label for="<?php echo $this->get_field_id( 'cwp_timespan' ); ?>"><?php _e( 'Timespan (weeks):', 'wp-product-review' ); ?></label>
-<div data-wppr-value="<?php echo $timespan; ?>" data-wppr-min="-52" data-wppr-max="0" class="wppr-timespan wppr-range-slider" data-wppr-desc="<?php echo $this->get_field_id( 'cwp_timespan_desc' ); ?>"></div>
-<div class="wppr-timespan-desc" id="<?php echo $this->get_field_id( 'cwp_timespan_desc' ); ?>">
+<div data-rp-value="<?php echo $timespan; ?>" data-rp-min="-52" data-rp-max="0" class="rp-timespan rp-range-slider" data-rp-desc="<?php echo $this->get_field_id( 'cwp_timespan_desc' ); ?>"></div>
+<div class="rp-timespan-desc" id="<?php echo $this->get_field_id( 'cwp_timespan_desc' ); ?>">
 <input type="hidden" id="<?php echo $this->get_field_id( 'cwp_timespan' ); ?>" name="<?php echo $this->get_field_name( 'cwp_timespan' ); ?>" value="<?php echo $timespan; ?>">
-<?php echo sprintf(__( 'Posts published between %s%d%s and %s%d%s week(s) ago', 'wp-product-review' ), '<span class="wppr-range-min">', abs($min), '</span>', '<span class="wppr-range-max">', abs($max), '</span>');?>
+<?php echo sprintf(__( 'Posts published between %s%d%s and %s%d%s week(s) ago', 'wp-product-review' ), '<span class="rp-range-min">', abs($min), '</span>', '<span class="rp-range-max">', abs($max), '</span>');?>
 </div>
 </p>
 <?php
@@ -133,7 +123,7 @@ foreach( get_post_types( '', 'objects' ) as $post_type ) {
 	<label for="<?php echo $this->get_field_id( 'cwp_tp_layout' ); ?>"><?php _e( 'Layout:', 'wp-product-review' ); ?></label>
 	<?php
 	$layouts            = array();
-	$customLayoutFiles  = glob( WPPR_PATH . '/includes/public/layouts/widget/*.php' );
+	$customLayoutFiles  = glob( RP_PATH . '/includes/public/layouts/widget/*.php' );
 	foreach ( $customLayoutFiles as $file ) {
 		$layouts[ basename( $file ) ] = ucwords( basename( $file, '.php' ) );
 	}
@@ -144,20 +134,20 @@ foreach( get_post_types( '', 'objects' ) as $post_type ) {
 		$id         = $this->get_field_id( $styleName );
 		?>
 		<br>
-		<input type="radio" name="<?php echo $this->get_field_name( 'cwp_tp_layout' ); ?>" value="<?php echo $key;?>" id="<?php echo $id . 'style'?>" <?php echo $extra;?> class="wppr-stylestyle"><label for="<?php echo $id . 'style';?>" class="wppr-stylestyle"><?php echo $val;?></label>
-		<span class="wppr-styleimg" id="<?php echo $id . 'style'?>img">
-			<img src="<?php echo WPPR_URL . '/assets/img/' . $styleName . '.png';?>">
+		<input type="radio" name="<?php echo $this->get_field_name( 'cwp_tp_layout' ); ?>" value="<?php echo $key;?>" id="<?php echo $id . 'style'?>" <?php echo $extra;?> class="rp-stylestyle"><label for="<?php echo $id . 'style';?>" class="rp-stylestyle"><?php echo $val;?></label>
+		<span class="rp-styleimg" id="<?php echo $id . 'style'?>img">
+			<img src="<?php echo RP_URL . '/assets/img/' . $styleName . '.png';?>">
 		</span>
 		<?php
 	endforeach;
 	?>
 </p>
-<p class="wppr-customField" style="display: none">
+<p class="rp-customField" style="display: none">
 	<?php $cwp_tp_buynow = esc_attr( $instance['cwp_tp_buynow'] ); ?>
 	<label for="<?php echo $this->get_field_id( 'cwp_tp_buynow' ); ?>"><?php _e( 'Buy Now text:', 'wp-product-review' ); ?></label>
 	<input id="<?php echo $this->get_field_id( 'cwp_tp_buynow' ); ?>" name="<?php echo $this->get_field_name( 'cwp_tp_buynow' ); ?>" class="widefat" type="text" value="<?php echo $cwp_tp_buynow; ?>" />
 </p>
-<p class="wppr-customField" style="display: none">
+<p class="rp-customField" style="display: none">
 	<?php $cwp_tp_readreview = esc_attr( $instance['cwp_tp_readreview'] ); ?>
 	<label for="<?php echo $this->get_field_id( 'cwp_tp_readreview' ); ?>"><?php _e( 'Read Review text:', 'wp-product-review' ); ?></label>
 	<input id="<?php echo $this->get_field_id( 'cwp_tp_readreview' ); ?>" name="<?php echo $this->get_field_name( 'cwp_tp_readreview' ); ?>" class="widefat" type="text" value="<?php echo $cwp_tp_readreview; ?>" />

@@ -3,11 +3,11 @@
  * Legacy file used for assuring backwards compatibility with old pro version.
  *
  * @deprecated
- * @package WPPR
+ * @package RP
  */
 
 ob_start();
-include_once WPPR_PATH . '/includes/public/layouts/' . $review_object->get_template() . '.php';
+include_once RP_PATH . '/includes/public/layouts/' . $review_object->get_template() . '.php';
 if ( ! isset( $output ) ) {
 	$output = '';
 }

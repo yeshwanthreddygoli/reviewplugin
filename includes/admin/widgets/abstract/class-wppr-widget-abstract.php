@@ -1,8 +1,8 @@
 <?php
 /**
- * The WPPR Widget Abstract Class.
+ * The RP Widget Abstract Class.
  *
- * @package WPPR
+ * @package RP
  * @subpackage Widget
  * @copyright   Copyright (c) 2017, Bogdan Preda
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
@@ -10,9 +10,9 @@
  */
 
 /**
- * Class WPPR_Widget_Abstract
+ * Class RP_Widget_Abstract
  */
-abstract class WPPR_Widget_Abstract extends WP_Widget {
+abstract class RP_Widget_Abstract extends WP_Widget {
 	const RESTRICT_TITLE_CHARS = 100;
 
 	/**
@@ -25,11 +25,11 @@ abstract class WPPR_Widget_Abstract extends WP_Widget {
 
 		$dependencies = $this->load_assets();
 
-		wp_enqueue_style( WPPR_SLUG . '-pac-widget-stylesheet', WPPR_URL . '/assets/css/cwppos-widget.css', isset( $dependencies['css'] ) ? $dependencies['css'] : array(), WPPR_LITE_VERSION );
-		wp_enqueue_style( WPPR_SLUG . '-widget-stylesheet-one', WPPR_URL . '/assets/css/cwppos-widget-style1.css', array( WPPR_SLUG . '-pac-widget-stylesheet' ), WPPR_LITE_VERSION );
-		wp_enqueue_style( WPPR_SLUG . '-widget-rating', WPPR_URL . '/assets/css/cwppos-widget-rating.css', array( WPPR_SLUG . '-pac-widget-stylesheet' ), WPPR_LITE_VERSION );
+		wp_enqueue_style( RP_SLUG . '-pac-widget-stylesheet', RP_URL . '/assets/css/cwppos-widget.css', isset( $dependencies['css'] ) ? $dependencies['css'] : array(), RP_LITE_VERSION );
+		wp_enqueue_style( RP_SLUG . '-widget-stylesheet-one', RP_URL . '/assets/css/cwppos-widget-style1.css', array( RP_SLUG . '-pac-widget-stylesheet' ), RP_LITE_VERSION );
+		wp_enqueue_style( RP_SLUG . '-widget-rating', RP_URL . '/assets/css/cwppos-widget-rating.css', array( RP_SLUG . '-pac-widget-stylesheet' ), RP_LITE_VERSION );
 
-		$plugin = new WPPR();
+		$plugin = new RP();
 		$public = new Wppr_Public( $plugin->get_plugin_name(), $plugin->get_version() );
 
 		$public->load_review_assets( $review_object );
@@ -60,7 +60,7 @@ abstract class WPPR_Widget_Abstract extends WP_Widget {
 
 		if ( ! isset( $instance['cwp_tp_post_types'] ) || empty( $instance['cwp_tp_post_types'] ) ) {
 			$types  = array( 'post', 'page' );
-			if ( 'wppr_top_reviews_widget' === $this->id_base ) {
+			if ( 'rp_top_reviews_widget' === $this->id_base ) {
 				$types = array( 'post' );
 			}
 			$instance['cwp_tp_post_types'] = $types;
@@ -97,24 +97,24 @@ abstract class WPPR_Widget_Abstract extends WP_Widget {
 
 		// @codingStandardsIgnoreEnd
 
-		add_filter( 'wppr_review_image_size', array( $this, 'image_size' ), 10, 3 );
+		add_filter( 'rp_review_image_size', array( $this, 'image_size' ), 10, 3 );
 
 		return $instance;
 	}
 
 	/**
-	 * Change size to wppr-widget.
+	 * Change size to rp-widget.
 	 *
 	 * @access  public
 	 *
 	 * @param   string            $size The size of the image.
 	 * @param   int               $id The id of the review.
-	 * @param   WPPR_Review_Model $model The review model.
+	 * @param   RP_Review_Model $model The review model.
 	 *
 	 * @return string
 	 */
 	public function image_size( $size, $id, $model ) {
-		return 'wppr-widget';
+		return 'rp-widget';
 	}
 
 	/**
@@ -166,7 +166,7 @@ abstract class WPPR_Widget_Abstract extends WP_Widget {
 		if ( ! isset( $instance['cwp_tp_post_types'] ) || empty( $instance['cwp_tp_post_types'] ) ) {
 			// backward compatibility with previous versions where you could not select post types
 			$types  = array( 'post', 'page' );
-			if ( 'wppr_top_reviews_widget' === $this->id_base ) {
+			if ( 'rp_top_reviews_widget' === $this->id_base ) {
 				$types = array( 'post' );
 			}
 			$instance['cwp_tp_post_types'] = $types;
@@ -175,11 +175,11 @@ abstract class WPPR_Widget_Abstract extends WP_Widget {
 		if ( isset( $instance['cwp_tp_post_types'] ) && ! empty( $instance['cwp_tp_post_types'] ) ) {
 			$categories = array();
 			foreach ( $instance['cwp_tp_post_types'] as $type ) {
-				if ( 'wppr_top_reviews_widget' === $this->id_base ) {
-					$categories = WPPR_Admin::get_taxonomy_and_terms_for_post_type( $type );
+				if ( 'rp_top_reviews_widget' === $this->id_base ) {
+					$categories = RP_Admin::get_taxonomy_and_terms_for_post_type( $type );
 				} else {
 					$post_type = get_post_type_object( $type );
-					$cats      = WPPR_Admin::get_category_for_post_type( $type );
+					$cats      = RP_Admin::get_category_for_post_type( $type );
 					if ( $cats ) {
 						$categories[ $post_type->label ] = $cats;
 					}
@@ -235,23 +235,23 @@ abstract class WPPR_Widget_Abstract extends WP_Widget {
 
 			$dependencies = $this->load_admin_assets();
 
-			wp_enqueue_style( WPPR_SLUG . '-widget-admin-css', WPPR_URL . '/assets/css/cwppos-widget-admin.css', isset( $dependencies['css'] ) ? $dependencies['css'] : array(), WPPR_LITE_VERSION );
-			wp_enqueue_style( WPPR_SLUG . '-chosen', WPPR_URL . '/assets/css/chosen.min.css', array(), WPPR_LITE_VERSION );
+			wp_enqueue_style( RP_SLUG . '-widget-admin-css', RP_URL . '/assets/css/cwppos-widget-admin.css', isset( $dependencies['css'] ) ? $dependencies['css'] : array(), RP_LITE_VERSION );
+			wp_enqueue_style( RP_SLUG . '-chosen', RP_URL . '/assets/css/chosen.min.css', array(), RP_LITE_VERSION );
 
-			wp_enqueue_script( WPPR_SLUG . '-chosen', WPPR_URL . '/assets/js/chosen.jquery.min.js', array( 'jquery' ), WPPR_LITE_VERSION );
-			wp_register_script( WPPR_SLUG . '-widget-script', WPPR_URL . '/assets/js/widget-admin.js', array_merge( array( WPPR_SLUG . '-chosen' ), isset( $dependencies['js'] ) ? $dependencies['js'] : array() ), WPPR_LITE_VERSION );
+			wp_enqueue_script( RP_SLUG . '-chosen', RP_URL . '/assets/js/chosen.jquery.min.js', array( 'jquery' ), RP_LITE_VERSION );
+			wp_register_script( RP_SLUG . '-widget-script', RP_URL . '/assets/js/widget-admin.js', array_merge( array( RP_SLUG . '-chosen' ), isset( $dependencies['js'] ) ? $dependencies['js'] : array() ), RP_LITE_VERSION );
 
 			wp_localize_script(
-				WPPR_SLUG . '-widget-script',
-				'wppr_widget',
+				RP_SLUG . '-widget-script',
+				'rp_widget',
 				array(
-					'names' => array( 'cwp_top_products_widget', 'cwp_latest_products_widget', 'wppr_top_reviews_widget' ),
+					'names' => array( 'cwp_top_products_widget', 'cwp_latest_products_widget', 'rp_top_reviews_widget' ),
 					'ajax'  => array(
-						'nonce' => wp_create_nonce( WPPR_SLUG ),
+						'nonce' => wp_create_nonce( RP_SLUG ),
 					),
 				)
 			);
-			wp_enqueue_script( WPPR_SLUG . '-widget-script' );
+			wp_enqueue_script( RP_SLUG . '-widget-script' );
 
 		}
 	}

@@ -2,68 +2,68 @@
 Template 2
  */
 
-.wppr-template-2 .wppr-review-head {
+.rp-template-2 .rp-review-head {
 	display: table;
 	width: 100%;
 }
 
-.wppr-template-2 .wppr-review-rating,
-.wppr-template-2 .wppr-review-pros,
-.wppr-template-2 .wppr-review-cons {
+.rp-template-2 .rp-review-rating,
+.rp-template-2 .rp-review-pros,
+.rp-template-2 .rp-review-cons {
 	display: table-cell;
 	vertical-align: top;
 }
 
-.wppr-template-2 .wppr-review-head:not(.wppr-review-with-pros-cons) .wppr-review-rating {
+.rp-template-2 .rp-review-head:not(.rp-review-with-pros-cons) .rp-review-rating {
 	float: left;
 }
 
-.wppr-template-2 .wppr-review-head.wppr-review-with-pros-cons:not(.wppr-review-with-image) .wppr-review-rating-grade,
-.wppr-template-2 .wppr-review-head.wppr-review-with-pros-cons:not(.wppr-review-with-image) .wppr-review-rating-users {
+.rp-template-2 .rp-review-head.rp-review-with-pros-cons:not(.rp-review-with-image) .rp-review-rating-grade,
+.rp-template-2 .rp-review-head.rp-review-with-pros-cons:not(.rp-review-with-image) .rp-review-rating-users {
 	float: none;
 	width: 100%;
 }
 
-.wppr-template-2 .wppr-review-head.wppr-review-with-image .wppr-review-rating {
+.rp-template-2 .rp-review-head.rp-review-with-image .rp-review-rating {
 	float: left;
 	box-sizing: content-box;
 	width: 240px;
 }
 
-.wppr-template-2 .wppr-review-head:not(.wppr-review-with-image) .wppr-review-rating {
+.rp-template-2 .rp-review-head:not(.rp-review-with-image) .rp-review-rating {
 	float: left;
 }
 
-.wppr-template-2 .wppr-review-head:not(.wppr-review-with-image):not(.wppr-review-with-pros-cons) .wppr-review-rating {
+.rp-template-2 .rp-review-head:not(.rp-review-with-image):not(.rp-review-with-pros-cons) .rp-review-rating {
 	float: left;
 }
 
-.wppr-template-2 .wppr-review-head.wppr-review-with-pros-cons .wppr-review-rating {
+.rp-template-2 .rp-review-head.rp-review-with-pros-cons .rp-review-rating {
 	padding-right: 30px;
 }
 
-.wppr-template-2 .wppr-review-head.wppr-review-with-pros-cons .wppr-review-rating.rtl {
+.rp-template-2 .rp-review-head.rp-review-with-pros-cons .rp-review-rating.rtl {
 	padding-right: 0;
 	padding-left: 30px;
 }
 
-.wppr-template-2 .wppr-review-head.wppr-review-with-pros-cons .wppr-review-rating-grade,
-.wppr-template-2 .wppr-review-head.wppr-review-with-pros-cons .wppr-review-rating-image {
+.rp-template-2 .rp-review-head.rp-review-with-pros-cons .rp-review-rating-grade,
+.rp-template-2 .rp-review-head.rp-review-with-pros-cons .rp-review-rating-image {
 	float: left;
 }
 
-.wppr-template-2.rtl .wppr-review-head.wppr-review-with-pros-cons .wppr-review-rating-grade,
-.wppr-template-2.rtl .wppr-review-head.wppr-review-with-pros-cons .wppr-review-rating-image {
+.rp-template-2.rtl .rp-review-head.rp-review-with-pros-cons .rp-review-rating-grade,
+.rp-template-2.rtl .rp-review-head.rp-review-with-pros-cons .rp-review-rating-image {
 	float: right;
 }
 
-.wppr-template-2 .wppr-review-pros,
-.wppr-template-2 .wppr-review-cons {
+.rp-template-2 .rp-review-pros,
+.rp-template-2 .rp-review-cons {
 	width: 50%;
 	padding-left: 30px;
 }
 
-.wppr-template-2 .wppr-review-rating-grade {
+.rp-template-2 .rp-review-rating-grade {
 	display: inline-block;
 	float: left;
 	min-width: 120px;
@@ -76,12 +76,12 @@ Template 2
 	letter-spacing: -0.05em;
 }
 
-.wppr-template-2 .wppr-review-head:not(.wppr-review-with-image) .wppr-review-rating-grade {
+.rp-template-2 .rp-review-head:not(.rp-review-with-image) .rp-review-rating-grade {
 	width: 100%;
 }
 
-.wppr-template-2 .wppr-review-product-image,
-.wppr-template-2 .wppr-review-product-image img {
+.rp-template-2 .rp-review-product-image,
+.rp-template-2 .rp-review-product-image img {
 	width: 120px;
 	height: 120px;
 	margin: 0;
@@ -89,14 +89,14 @@ Template 2
 	object-fit: fill;
 }
 
-.wppr-template-2 .wppr-review-product-image {
+.rp-template-2 .rp-review-product-image {
 	display: inline-block;
 	float: left;
 	overflow: hidden;
 	position: relative;
 }
 
-.wppr-template-2 .wppr-review-product-image img {
+.rp-template-2 .rp-review-product-image img {
 	position: absolute;
 	top: 50%;
 	bottom: -60px;
@@ -107,13 +107,13 @@ Template 2
 	transform: translate(-50%,-50%);
 }
 
-.wppr-template-2 .wppr-review-product-image.wppr-review-product-image-full img {
+.rp-template-2 .rp-review-product-image.rp-review-product-image-full img {
 	width: auto;
 	max-width: none;
 	height: 100%;
 }
 
-.wppr-template-2 .wppr-review-rating-users {
+.rp-template-2 .rp-review-rating-users {
 	display: block;
 	float: left;
 	width: 100%;
@@ -125,21 +125,21 @@ Template 2
 	white-space: nowrap;
 }
 
-.wppr-template-2 .wppr-review-rating-users strong {
+.rp-template-2 .rp-review-rating-users strong {
 	font-size: 16px;
 	font-weight: 700;
 }
 
-.wppr-template-2 .wppr-review-pros h3,
-.wppr-template-2 .wppr-review-cons h3 {
+.rp-template-2 .rp-review-pros h3,
+.rp-template-2 .rp-review-cons h3 {
 	margin: 0 !important;
 	font-size: 18px;
 	font-weight: 700;
 	text-transform: uppercase;
 }
 
-.wppr-template-2 .wppr-review-pros ul,
-.wppr-template-2 .wppr-review-cons ul {
+.rp-template-2 .rp-review-pros ul,
+.rp-template-2 .rp-review-cons ul {
 	margin: 0;
 	padding-left: 20px;
 	color: inherit;
@@ -147,30 +147,30 @@ Template 2
 	list-style-type: square;
 }
 
-.wppr-template-2.rtl .wppr-review-pros ul,
-.wppr-template-2.rtl .wppr-review-cons ul {
+.rp-template-2.rtl .rp-review-pros ul,
+.rp-template-2.rtl .rp-review-cons ul {
 	list-style-position: inside;
 }
 
-.wppr-template-2 .wppr-review-options {
+.rp-template-2 .rp-review-options {
 	float: left;
 	width: 100%;
 	margin-top: 45px;
 }
 
-.wppr-template-2 .wppr-review-option {
+.rp-template-2 .rp-review-option {
 	display: table;
 	width: 100%;
 	margin-bottom: 10px;
 }
 
-.wppr-template-2 .wppr-review-option-header {
+.rp-template-2 .rp-review-option-header {
 	display: table-cell;
 	width: 150px;
 	vertical-align: middle;
 }
 
-.wppr-template-2 .wppr-review-option-rating {
+.rp-template-2 .rp-review-option-rating {
 	display: table-cell;
 	margin: 0;
 	padding: 0;
@@ -178,7 +178,7 @@ Template 2
 	list-style: none;
 }
 
-.wppr-template-2 .wppr-review-option-rating li {
+.rp-template-2 .rp-review-option-rating li {
 	display: inline-block;
 	float: left;
 	margin-right: 10px;
@@ -188,76 +188,76 @@ Template 2
 	line-height: 1;
 }
 
-.wppr-template-2 .wppr-review-option-rating li:first-child {
+.rp-template-2 .rp-review-option-rating li:first-child {
 	text-align: left;
 }
 
-.wppr-template-2 .wppr-review-option-rating li:last-child {
+.rp-template-2 .rp-review-option-rating li:last-child {
 	text-align: right;
 }
 
-.wppr-template-2 .wppr-review-option-rating li:before {
+.rp-template-2 .rp-review-option-rating li:before {
 	content: "\f155";
 }
 
-.wppr-template-2.rtl .affiliate-button a span {
+.rp-template-2.rtl .affiliate-button a span {
 	margin-right: -10px;
 	margin-left: auto;
 	padding-right: 20px;
 	padding-left: auto;
 }
 
-.wppr-template-2.rtl .wppr-review-option-rating {
+.rp-template-2.rtl .rp-review-option-rating {
 	float: right;
 }
 
 @media (max-width: 768px) {
-	.wppr-template-2 .wppr-review-pros,
-	.wppr-template-2 .wppr-review-cons {
+	.rp-template-2 .rp-review-pros,
+	.rp-template-2 .rp-review-cons {
 		display: block;
 		float: left;
 		width: 100%;
 	}
 
-	.wppr-template-2 .wppr-review-head {
+	.rp-template-2 .rp-review-head {
 		display: block;
 		float: left;
 	}
 
-	.wppr-template-2 .wppr-review-pros,
-	.wppr-template-2 .wppr-review-cons {
+	.rp-template-2 .rp-review-pros,
+	.rp-template-2 .rp-review-cons {
 		margin-top: 15px;
 		padding-left: 0;
 	}
 
-	.wppr-template-2 .wppr-review-rating {
+	.rp-template-2 .rp-review-rating {
 		text-align: center;
 	}
 
-	.wppr-template-2 .wppr-review-head.wppr-review-with-pros-cons .wppr-review-rating {
+	.rp-template-2 .rp-review-head.rp-review-with-pros-cons .rp-review-rating {
 		padding: 0;
 	}
 }
 
 @media (max-width: 480px) {
-	.wppr-template-2 .wppr-review-option-header,
-	.wppr-template-2 .wppr-review-option-rating {
+	.rp-template-2 .rp-review-option-header,
+	.rp-template-2 .rp-review-option-rating {
 		display: block;
 		float: left;
 		width: 100%;
 	}
 
-	.wppr-template-2 .wppr-review-option-rating li {
+	.rp-template-2 .rp-review-option-rating li {
 		margin-right: 0;
 	}
 
-	.wppr-template-2 .wppr-review-rating-users {
+	.rp-template-2 .rp-review-rating-users {
 		white-space: normal;
 	}
 
-	.wppr-template-2 .wppr-review-head .wppr-review-rating-grade,
-	.wppr-template-2 .wppr-review-product-image,
-	.wppr-template-2 .wppr-review-head.wppr-review-with-image .wppr-review-rating {
+	.rp-template-2 .rp-review-head .rp-review-rating-grade,
+	.rp-template-2 .rp-review-product-image,
+	.rp-template-2 .rp-review-head.rp-review-with-image .rp-review-rating {
 		width: 100%;
 	}
 }

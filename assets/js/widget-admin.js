@@ -9,8 +9,8 @@
 		if (widget_selector.length > 0) {
 			widget_selector.each(function () {
 				var id = $(this).attr("id")
-				for(name in wppr_widget.names){
-					if (id.indexOf(wppr_widget.names[name]) !== -1) {
+				for(name in rp_widget.names){
+					if (id.indexOf(rp_widget.names[name]) !== -1) {
 						toggleCustomFields(true, id);
 					}
 				}
@@ -21,18 +21,18 @@
 		}
 
 
-        $('.wppr-range-slider').each(function(){
+        $('.rp-range-slider').each(function(){
             $(this).slider({
                 range   : true,
                 step    : 1,
-                min     : parseInt($(this).attr('data-wppr-min')),
-                max     : parseInt($(this).attr('data-wppr-max')),
-                values  : JSON.parse('[' + $(this).attr('data-wppr-value') + ']'),
+                min     : parseInt($(this).attr('data-rp-min')),
+                max     : parseInt($(this).attr('data-rp-max')),
+                values  : JSON.parse('[' + $(this).attr('data-rp-value') + ']'),
                 slide   : function( event, ui ) {
-                    var $desc = $('#' + $(this).attr('data-wppr-desc'));
+                    var $desc = $('#' + $(this).attr('data-rp-desc'));
                     $desc.find('input').val(ui.values[0] + ',' + ui.values[1]);
-                    $desc.find('span.wppr-range-min').html(Math.abs(ui.values[0]));
-                    $desc.find('span.wppr-range-max').html(Math.abs(ui.values[1]));
+                    $desc.find('span.rp-range-min').html(Math.abs(ui.values[0]));
+                    $desc.find('span.rp-range-max').html(Math.abs(ui.values[1]));
                 }
             });
         });
@@ -47,30 +47,30 @@
     function initEvents(widget) {
         if(widget){
             widget.find( '.chosen-container' ).remove();
-            widget.find('select.wppr-chosen').chosen({
+            widget.find('select.rp-chosen').chosen({
                 width               : '100%',
                 search_contains     : true
             });
-            widget.find('.wppr-post-types').on('change', function(evt, params) {
-                get_categories(params, $(this), $('#' + $(this).attr('data-wppr-cat-combo')));
+            widget.find('.rp-post-types').on('change', function(evt, params) {
+                get_categories(params, $(this), $('#' + $(this).attr('data-rp-cat-combo')));
             });
-            widget.find('.wppr-post-type').on('change', function(evt, params) {
-                get_taxonomies(params, $(this), $('#' + $(this).attr('data-wppr-cat-combo')));
+            widget.find('.rp-post-type').on('change', function(evt, params) {
+                get_taxonomies(params, $(this), $('#' + $(this).attr('data-rp-cat-combo')));
             });
         }else{
-            $('select.wppr-chosen').chosen({
+            $('select.rp-chosen').chosen({
                 width               : '100%',
                 search_contains     : true
             });
-            $('.wppr-post-types').on('change', function(evt, params) {
-                get_categories(params, $(this), $('#' + $(this).attr('data-wppr-cat-combo')));
+            $('.rp-post-types').on('change', function(evt, params) {
+                get_categories(params, $(this), $('#' + $(this).attr('data-rp-cat-combo')));
             });
-            $('.wppr-post-type').on('change', function(evt, params) {
-                get_taxonomies(params, $(this), $('#' + $(this).attr('data-wppr-cat-combo')));
+            $('.rp-post-type').on('change', function(evt, params) {
+                get_taxonomies(params, $(this), $('#' + $(this).attr('data-rp-cat-combo')));
             });
         }
 
-        $('.wppr-datepicker').each(function(){
+        $('.rp-datepicker').each(function(){
             $(this).datepicker({
                 dateFormat: "yy-mm-dd",
                 changeYear: true,
@@ -83,7 +83,7 @@
 
     function get_taxonomies(params, types, categories){
         if(params.selected){
-            $('.wppr-cat-spinner').css('visibility', 'visible').show();
+            $('.rp-cat-spinner').css('visibility', 'visible').show();
             $.ajax({
                 url     : ajaxurl,
                 method  : 'post',
@@ -107,7 +107,7 @@
                         categories.append($all);
                     }
                     categories.trigger("chosen:updated");
-                    $('.wppr-cat-spinner').css('visibility', 'hidden').hide();
+                    $('.rp-cat-spinner').css('visibility', 'hidden').hide();
                 }
             });
         }
@@ -115,7 +115,7 @@
 
     function get_categories(params, types, categories){
         if(params.selected){
-            $('.wppr-cat-spinner').css('visibility', 'visible').show();
+            $('.rp-cat-spinner').css('visibility', 'visible').show();
             $.ajax({
                 url     : ajaxurl,
                 method  : 'post',
@@ -134,7 +134,7 @@
                         categories.append($group);
                         categories.trigger("chosen:updated");
                     }
-                    $('.wppr-cat-spinner').css('visibility', 'hidden').hide();
+                    $('.rp-cat-spinner').css('visibility', 'hidden').hide();
                 }
             });
         }else{
@@ -147,9 +147,9 @@
 	function toggleCustomFields(deflt, widgetID) {
 		var val = getWidgetStyle(widgetID);
 		if (val === "default.php") {
-			$("#" + widgetID).find(".wppr-customField").hide();
+			$("#" + widgetID).find(".rp-customField").hide();
 		} else {
-			$("#" + widgetID).find(".wppr-customField").show();
+			$("#" + widgetID).find(".rp-customField").show();
 		}
 
 		addListeners(widgetID);
@@ -161,10 +161,10 @@
 
 	function addListeners(widgetID) {
 		var widget = $("#" + widgetID);
-		widget.find("input.wppr-stylestyle").on("click", function (e) {
+		widget.find("input.rp-stylestyle").on("click", function (e) {
 			toggleCustomFields(false, widgetID);
 		});
-		widget.find("label.wppr-stylestyle").hover(function (e) {
+		widget.find("label.rp-stylestyle").hover(function (e) {
 			var img = $("#" + $(this).attr("for") + "img");
 			img.show();
 			img.css('position', 'absolute');
@@ -175,8 +175,8 @@
 	}
 
 	function getWidgetStyle(id) {
-		var name = $("#" + id).find("input:radio.wppr-stylestyle").attr("name");
+		var name = $("#" + id).find("input:radio.rp-stylestyle").attr("name");
 		return $("input:radio[name='" + name + "']:checked").val();
 	}
 
-})(jQuery, wppr_widget);
+})(jQuery, rp_widget);

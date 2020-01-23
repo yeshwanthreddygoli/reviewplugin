@@ -7,7 +7,7 @@
     });
 
     function onReady() {
-        $('.wppr-review-type').accordion({
+        $('.rp-review-type').accordion({
             heightStyle: 'content',
             collapsible: true,
             active: false,

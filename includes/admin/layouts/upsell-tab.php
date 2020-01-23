@@ -1,13 +1,5 @@
 <?php
-/**
- *  Up-sell layout in the admin dashboard.
- *
- * @package     WPPR
- * @subpackage  Layouts
- * @copyright   Copyright (c) 2017, Marius Cristea
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since       3.0.0
- */
+
 
 ?>
 
@@ -27,7 +19,7 @@
 					do instead of tracking them.</p>
 			</div>
 			<div class="pro-feature-image"><img
-						src="<?php echo WPPR_URL; ?>/assets/img/wppr-amazon-integration-and-support.jpg">
+						src="<?php echo RP_URL; ?>/assets/img/rp-amazon-integration-and-support.jpg">
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -42,7 +34,7 @@
 				in the same page.</p>
 
 		</div>
-		<div class="pro-feature-image"><img src="<?php echo WPPR_URL; ?>/assets/img/wppr-shortcodes.jpg"></div>
+		<div class="pro-feature-image"><img src="<?php echo RP_URL; ?>/assets/img/rp-shortcodes.jpg"></div>
 		<div class="clear"></div>
 		</div>
 	</div>
@@ -55,7 +47,7 @@
 			<p>Our powerful ranking table add-on is also included in the bundle and by using it you can automatically
 				generate comparison landing pages or enhance your review articles even more</p>
 		</div>
-		<div class="pro-feature-image"><img src="<?php echo WPPR_URL; ?>/assets/img/wppr-review-comparison.jpg"></div>
+		<div class="pro-feature-image"><img src="<?php echo RP_URL; ?>/assets/img/rp-review-comparison.jpg"></div>
 		<div class="clear"></div>
 		</div>
 	</div>
@@ -69,7 +61,7 @@
 				previously built</p>
 
 		</div>
-		<div class="pro-feature-image"><img src="<?php echo WPPR_URL; ?>/assets/img/wppr-import.jpg"></div>
+		<div class="pro-feature-image"><img src="<?php echo RP_URL; ?>/assets/img/rp-import.jpg"></div>
 		<div class="clear"></div>
 		</div>
 	</div>

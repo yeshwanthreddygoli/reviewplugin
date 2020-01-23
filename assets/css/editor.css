@@ -1,99 +1,99 @@
-#wppr-review-yes,
-#wppr-review-no {
+#rp-review-yes,
+#rp-review-no {
 	margin-left: 10px;
 }
 
-#wppr-meta-yes {
+#rp-meta-yes {
 	display: block;
 }
 
-#wppr-meta-no {
+#rp-meta-no {
 	display: none;
 }
 
-.wppr-review-section p,
+.rp-review-section p,
 h4 {
 	margin: 0;
 }
 
-.wppr-review-section label[for="wppr-editor-link-show"],
-.wppr-review-section label[for="wppr-editor-link-open"] {
+.rp-review-section label[for="rp-editor-link-show"],
+.rp-review-section label[for="rp-editor-link-open"] {
 	font-weight: normal;
 }
 
-.wppr-review-section span {
+.rp-review-section span {
 	padding-bottom: 10px;
 	font-weight: bold;
 }
 
-#wppr-editor-link-show {
+#rp-editor-link-show {
 	margin-left: 11px;
 }
 
-.wppr-review-section input[type="text"]:not(.regular-text) {
+.rp-review-section input[type="text"]:not(.regular-text) {
 	width: 200px;
 }
 
-.wppr-review-section li {
+.rp-review-section li {
 	margin-bottom: 12px;
 }
 
-#wppr-editor-image-button {
+#rp-editor-image-button {
 	margin-left: 5px;
 }
 
-.wppr-review-section small {
+.rp-review-section small {
 	display: block;
 	padding-bottom: 10px;
 	padding-left: 144px;
 }
 
-.wppr-review-section .size-text {
+.rp-review-section .size-text {
 	padding-bottom: 0;
 }
 
-#wppr-editor-new-link {
+#rp-editor-new-link {
 	font-size: 20px;
 	font-weight: bold;
 	cursor: pointer;
 }
 
-.wppr-review-section h4,
-.wppr-review-section p,
-.wppr-review-section .wppr-review-fieldset {
+.rp-review-section h4,
+.rp-review-section p,
+.rp-review-section .rp-review-fieldset {
 	padding: 3px 10px;
 }
 
-.wppr-review-fieldset {
+.rp-review-fieldset {
 	border-top: 1px solid #ddd;
 }
 
-.wppr-review-section {
+.rp-review-section {
 	margin-bottom: 10px;
 	border: 1px solid #ddd;
 	border-radius: 3px 3px 0 0;
 }
 
-.wppr-review-section label {
+.rp-review-section label {
 	display: inline-block;
 	width: 140px;
 	font-weight: bold;
 }
 
-.wppr-review-options-list input {
+.rp-review-options-list input {
 	margin: 0;
 }
 
-.wppr-review-options-list label,
+.rp-review-options-list label,
 input {
 	height: 30px;
 }
 
-.wppr-review-section .wppr-review-options-list .wppr-option-number {
+.rp-review-section .rp-review-options-list .rp-option-number {
 	width: 60px;
 }
 
-.wppr-review-options-list label {
+.rp-review-options-list label {
 	width: 30px;
 	height: 30px;
 	margin-right: -4px;
@@ -104,20 +104,20 @@ input {
 	vertical-align: top;
 }
 
-.wppr-review-pros,
-.wppr-review-cons {
+.rp-review-pros,
+.rp-review-cons {
 	width: 49%;
 }
 
-.wppr-review-pros {
+.rp-review-pros {
 	float: left;
 }
 
-.wppr-review-cons {
+.rp-review-cons {
 	float: right;
 }
 
-label.wppr-upsell-label {
+label.rp-upsell-label {
 	display: block;
 	width: 98%;
 	padding: 1%;
@@ -125,25 +125,25 @@ label.wppr-upsell-label {
 	text-align: center;
 }
 
-.wppr-review-options a.preload_info {
+.rp-review-options a.preload_info {
 	margin-top: -42px;
 	margin-right: 10px;
 }
 
 
-.wppr-review-type-fields {
+.rp-review-type-fields {
 	display: block;
 }
 
-.wppr-review-type {
+.rp-review-type {
 	margin-bottom: 2% !important;
 }
 
-.wppr-review-type-field p.desc {
+.rp-review-type-field p.desc {
 	color: #928b8b;
 }
 
-li.wppr-review-type-field label {
+li.rp-review-type-field label {
 	width: 30%;
 }
 

@@ -2,7 +2,7 @@
 /**
  *  WP Prodact Review front page layout.
  *
- * @package     WPPR
+ * @package     RP
  * @subpackage  Layouts
  * @copyright   Copyright (c) 2017, Bogdan Preda
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
@@ -14,10 +14,10 @@ $review         = $review_object->get_review_data();
 $sub_title_info = '';
 $sub_title_info = $review['price'];
 if ( $sub_title_info !== '' ) {
-	$is_disabled = apply_filters( 'wppr_disable_price_richsnippet', false );
+	$is_disabled = apply_filters( 'rp_disable_price_richsnippet', false );
 	$currency    = preg_replace( '/[0-9.,]/', '', $review['price'] );
 	if ( ! $is_disabled ) {
-		$country_iso    = apply_filters( 'wppr_currency_code', $currency );
+		$country_iso    = apply_filters( 'rp_currency_code', $currency );
 		$sub_title_info = '<span itemprop="offers" itemscope itemtype="http://schema.org/Offer">
                                 <span itemprop="priceCurrency" content="' . $country_iso . '">' . $currency . '</span>
                                 <span itemprop="price">' . $review['price'] . '</span>
@@ -26,7 +26,7 @@ if ( $sub_title_info !== '' ) {
 }
 
 $lightbox = '';
-if ( $review_object->wppr_get_option( 'cwppos_lighbox' ) === 'no' ) {
+if ( $review_object->rp_get_option( 'cwppos_lighbox' ) === 'no' ) {
 	$lightbox = 'data-lightbox="' . $review['image']['full'] . '"';
 }
 $image_link_url            = $review['image']['full'];

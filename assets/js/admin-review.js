@@ -5,7 +5,7 @@
 
         var meta_image_frame;
 
-        $( '#wppr-editor-image-button' ).click(function(e){
+        $( '#rp-editor-image-button' ).click(function(e){
 
             e.preventDefault();
 
@@ -26,49 +26,49 @@
 
                 var media_attachment = meta_image_frame.state().get( 'selection' ).first().toJSON();
 
-                $( '#wppr-editor-image' ).val( media_attachment.url );
+                $( '#rp-editor-image' ).val( media_attachment.url );
             });
 
             wp.media.frame.open();
         });
 
-        $( 'input:radio[name="wppr-review-status"]' ).change(function(){
+        $( 'input:radio[name="rp-review-status"]' ).change(function(){
             var value = $( this ).val();
             if (value === "yes") {
 
-                $( "#wppr-meta-yes" ).show();
-                $( "#wppr-meta-no" ).show();
+                $( "#rp-meta-yes" ).show();
+                $( "#rp-meta-no" ).show();
             } else {
-                $( "#wppr-meta-yes" ).hide();
-                $( "#wppr-meta-no" ).hide();
+                $( "#rp-meta-yes" ).hide();
+                $( "#rp-meta-no" ).hide();
             }
         });
 
-        $( '#wppr-editor-new-link' ).click(function(e){
+        $( '#rp-editor-new-link' ).click(function(e){
             e.preventDefault();
             $( '.hidden_fields' ).show();
             $( this ).hide();
             return false;
         });
 
-        $type = $('#wppr-editor-review-type').val();
+        $type = $('#rp-editor-review-type').val();
         if($type !== ''){
             populate_schema($type);
         }
 
-        $('#wppr-editor-review-type').on('change', function(e){
+        $('#rp-editor-review-type').on('change', function(e){
             $type = $(this).val();
             populate_schema($type);
         });
 
-        $('.wppr-review-type-fields-toggle a').on('click', function(e){
+        $('.rp-review-type-fields-toggle a').on('click', function(e){
             e.preventDefault();
-            if($('.wppr-review-type-fields').hasClass('hide')){
-                $('.wppr-review-type-fields').removeClass('hide');
-                $('.wppr-review-type-fields-toggle span').html('-');
+            if($('.rp-review-type-fields').hasClass('hide')){
+                $('.rp-review-type-fields').removeClass('hide');
+                $('.rp-review-type-fields-toggle span').html('-');
             }else{
-                $('.wppr-review-type-fields').addClass('hide');
-                $('.wppr-review-type-fields-toggle span').html('+');
+                $('.rp-review-type-fields').addClass('hide');
+                $('.rp-review-type-fields-toggle span').html('+');
             }
         });
 
@@ -76,16 +76,16 @@
 
     function populate_schema($type){
         $json = $values = null;
-        $data = $('#wppr-review-type-fields-template').attr('data-json');
+        $data = $('#rp-review-type-fields-template').attr('data-json');
         if(typeof $data !== 'undefined'){
             $json = JSON.parse($data);
         }
-        $data = $('#wppr-review-type-fields-template').attr('data-custom-fields');
+        $data = $('#rp-review-type-fields-template').attr('data-custom-fields');
         if(typeof $data !== 'undefined'){
            $values = JSON.parse($data);
         }
-        $saved_type = $('#wppr-review-type-fields-template').attr('data-type');
-        $template = $('#wppr-review-type-fields-template').html();
+        $saved_type = $('#rp-review-type-fields-template').attr('data-type');
+        $template = $('#rp-review-type-fields-template').html();
         $html = '';
         if($json !== null){
             $.each($json[$type], function(name, data){
@@ -96,7 +96,7 @@
                 $desc = data.desc.replace(/<a /g, '<a target="blank" ');
                 $html += $template.replace(/#name#/g, name).replace(/#desc#/, $desc).replace(/#value#/g, $value);
             });
-            $('.wppr-review-type-fields').empty().append($html);
+            $('.rp-review-type-fields').empty().append($html);
         }
     }
 

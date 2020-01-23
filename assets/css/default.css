@@ -193,7 +193,7 @@
 	text-align: center;
 }
 
-#review-statistics .review-wu-bars ul.wppr-custom-icon li {
+#review-statistics .review-wu-bars ul.rp-custom-icon li {
 	display: inline-block;
 	height: auto;
 	background: transparent !important;
@@ -267,7 +267,7 @@
 	width: 100%;
 }
 
-.wppr-review-container.wppr-review-no-pros.wppr-review-no-cons #review-statistics .review-wrap-up .review-wu-left {
+.rp-review-container.rp-review-no-pros.rp-review-no-cons #review-statistics .review-wrap-up .review-wu-left {
 	width: 100%;
 }
 
@@ -353,7 +353,7 @@
 	background: none !important;
 }
 
-.wppr-comment-form-meta input {
+.rp-comment-form-meta input {
 	background: none !important;
 }
 
@@ -390,31 +390,31 @@
 	list-style: none !important;
 }
 
-.wppr-template-default #review-statistics .review-wrap-up .review-wu-content .review-wu-left .review-wu-bars .rev-option span:first-of-type {
+.rp-template-default #review-statistics .review-wrap-up .review-wu-content .review-wu-left .review-wu-bars .rev-option span:first-of-type {
 	float: left;
 }
 
-.wppr-template-default #review-statistics .review-wrap-up .review-wu-content .review-wu-left .review-wu-bars .rev-option span:last-of-type {
+.rp-template-default #review-statistics .review-wrap-up .review-wu-content .review-wu-left .review-wu-bars .rev-option span:last-of-type {
 	float: right;
 }
 
-.wppr-template-default.rtl #review-statistics .review-wrap-up .cwpr-review-top span:first-of-type {
+.rp-template-default.rtl #review-statistics .review-wrap-up .cwpr-review-top span:first-of-type {
 	float: right;
 }
 
-.wppr-template-default.rtl #review-statistics .review-wrap-up .cwpr-review-top span:last-of-type {
+.rp-template-default.rtl #review-statistics .review-wrap-up .cwpr-review-top span:last-of-type {
 	float: left;
 }
 
-.wppr-template-default.rtl #review-statistics .review-wrap-up .review-wu-content .review-wu-left .review-wu-bars .rev-option span:first-of-type {
+.rp-template-default.rtl #review-statistics .review-wrap-up .review-wu-content .review-wu-left .review-wu-bars .rev-option span:first-of-type {
 	float: right;
 }
 
-.wppr-template-default.rtl #review-statistics .review-wrap-up .review-wu-content .review-wu-left .review-wu-bars .rev-option span:last-of-type {
+.rp-template-default.rtl #review-statistics .review-wrap-up .review-wu-content .review-wu-left .review-wu-bars .rev-option span:last-of-type {
 	float: left;
 }
 
-.wppr-template-default.rtl .affiliate-button a span {
+.rp-template-default.rtl .affiliate-button a span {
 	margin-right: -10px;
 	margin-left: auto;
 	padding-right: 20px;
@@ -459,11 +459,11 @@
 		height: 100px;
 	}
 
-	#review-statistics .review-wu-grade .wppr-c100 {
+	#review-statistics .review-wu-grade .rp-c100 {
 		font-size: 100px;
 	}
 
-	#review-statistics .review-wu-grade .wppr-c100 span {
+	#review-statistics .review-wu-grade .rp-c100 span {
 		font-size: 28px;
 		line-height: 100px;
 	}

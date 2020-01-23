@@ -1,11 +1,11 @@
-#wppr-slider-comment .wppr-comment-form-meta {
+#rp-slider-comment .rp-comment-form-meta {
 	float: right;
 	position: relative;
 	width: 100%;
 	margin-bottom: 12px;
 }
 
-#wppr-slider-comment .wppr-comment-form-meta label {
+#rp-slider-comment .rp-comment-form-meta label {
 	display: block;
 	float: left;
 	width: 80%;
@@ -15,7 +15,7 @@
 	line-height: 2;
 }
 
-#wppr-slider-comment .wppr-comment-form-meta .meta_option_input {
+#rp-slider-comment .rp-comment-form-meta .meta_option_input {
 	float: right;
 	width: 12%;
 	min-width: 0;
@@ -29,7 +29,7 @@
 	text-align: center;
 }
 
-#wppr-slider-comment .wppr-comment-form-meta .wppr-comment-meta-slider {
+#rp-slider-comment .rp-comment-form-meta .rp-comment-meta-slider {
 	float: left;
 	width: 100%;
 	height: 7px;
@@ -39,7 +39,7 @@
 	box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
 }
 
-#wppr-slider-comment .wppr-comment-form-meta .wppr-comment-meta-slider .ui-slider-handle {
+#rp-slider-comment .rp-comment-form-meta .rp-comment-meta-slider .ui-slider-handle {
 	top: -4px;
 	left: 5px;
 	width: 13px;
@@ -49,12 +49,12 @@
 	background: #3baeda;
 }
 
-#wppr-slider-comment .wppr-comment-form-meta .wppr-comment-meta-slider .ui-slider-handle:hover {
+#rp-slider-comment .rp-comment-form-meta .rp-comment-meta-slider .ui-slider-handle:hover {
 	box-shadow: inset 0 0 4px rgba(255, 255, 255, 0.3);
 	cursor: pointer;
 }
 
-#wppr-slider-comment cite.review-info {
+#rp-slider-comment cite.review-info {
 	color: #ddd;
 	font-style: italic !important;
 }
@@ -114,14 +114,14 @@
 	height: 100%;
 }
 
-#wppr-slider-comment {
+#rp-slider-comment {
 	display: block;
 	width: 230px;
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
 
-.wppr-comment-form-meta {
+.rp-comment-form-meta {
 	width: 100% !important;
 }
 
@@ -131,7 +131,7 @@
 
 /* Comment Form Meta Options - GRADE BAR */
 
-#wppr-slider-comment .comment-meta-option .comment-meta-grade-bar {
+#rp-slider-comment .comment-meta-option .comment-meta-grade-bar {
 	overflow: hidden;
 	width: 100%;
 	height: 5px;
@@ -150,11 +150,11 @@
 }
 
 
-#wppr-comment-rating-stars .wppr-comment-rating-star {
+#rp-comment-rating-stars .rp-comment-rating-star {
 	width: 20%;
 }
-#wppr-comment-rating-stars .wppr-comment-rating-star > input { display: none; } 
-#wppr-comment-rating-stars .wppr-comment-rating-star > label:before { 
+#rp-comment-rating-stars .rp-comment-rating-star > input { display: none; } 
+#rp-comment-rating-stars .rp-comment-rating-star > label:before { 
 	margin: 5px;
 	font-size: 1.25em;
 	font-family: dashicons;
@@ -162,12 +162,12 @@
 	content: "\f155";
 }
 
-#wppr-comment-rating-stars .wppr-comment-rating-star > .half:before { 
+#rp-comment-rating-stars .rp-comment-rating-star > .half:before { 
 	content: "\f459";
 	position: absolute;
 }
 
-#wppr-comment-rating-stars .wppr-comment-rating-star.rtl > .half:before { 
+#rp-comment-rating-stars .rp-comment-rating-star.rtl > .half:before { 
 	-webkit-transform: rotateY(180deg);
 	-moz-transform: rotateY(180deg);
 	-o-transform: rotateY(180deg);
@@ -175,28 +175,28 @@
 	transform: rotateY(180deg);
 }
 
-#wppr-comment-rating-stars .wppr-comment-rating-star > label { 
+#rp-comment-rating-stars .rp-comment-rating-star > label { 
 	color: #ddd; 
 	float: right; 
 }
 
-#wppr-comment-rating-stars .wppr-comment-rating-star.rtl > label { 
+#rp-comment-rating-stars .rp-comment-rating-star.rtl > label { 
 	float: left;
 }
 
 /***** CSS Magic to Highlight Stars on Hover *****/
 
-#wppr-comment-rating-stars .wppr-comment-rating-star > input:checked ~ label, /* show gold star when clicked */
-#wppr-comment-rating-stars .wppr-comment-rating-star:not(:checked) > label:hover, /* hover current star */
-#wppr-comment-rating-stars .wppr-comment-rating-star:not(:checked) > label:hover ~ label {
+#rp-comment-rating-stars .rp-comment-rating-star > input:checked ~ label, /* show gold star when clicked */
+#rp-comment-rating-stars .rp-comment-rating-star:not(:checked) > label:hover, /* hover current star */
+#rp-comment-rating-stars .rp-comment-rating-star:not(:checked) > label:hover ~ label {
 	color: #FFD700;
 	cursor: pointer;
 } /* hover previous stars in list */
 
-#wppr-comment-rating-stars .wppr-comment-rating-star > input:checked + label:hover, /* hover current star when changing rating */
-#wppr-comment-rating-stars .wppr-comment-rating-star > input:checked ~ label:hover,
-#wppr-comment-rating-stars .wppr-comment-rating-star > label:hover ~ input:checked ~ label, /* lighten current selection */
-#wppr-comment-rating-stars .wppr-comment-rating-star > input:checked ~ label:hover ~ label {
+#rp-comment-rating-stars .rp-comment-rating-star > input:checked + label:hover, /* hover current star when changing rating */
+#rp-comment-rating-stars .rp-comment-rating-star > input:checked ~ label:hover,
+#rp-comment-rating-stars .rp-comment-rating-star > label:hover ~ input:checked ~ label, /* lighten current selection */
+#rp-comment-rating-stars .rp-comment-rating-star > input:checked ~ label:hover ~ label {
 	color: #FFED85;
 	cursor: pointer;
 }

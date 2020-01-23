@@ -1,8 +1,8 @@
 <?php
 /**
- * The WPPR Latest Widget Class.
+ * The RP Latest Widget Class.
  *
- * @package WPPR
+ * @package RP
  * @subpackage Widget
  * @copyright   Copyright (c) 2017, Bogdan Preda
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
@@ -10,12 +10,12 @@
  */
 
 /**
- * Class WPPR_Latest_Products_Widget
+ * Class RP_Latest_Products_Widget
  */
-class WPPR_Latest_Products_Widget extends WPPR_Widget_Abstract {
+class RP_Latest_Products_Widget extends RP_Widget_Abstract {
 
 	/**
-	 * WPPR_Latest_Products_Widget constructor.
+	 * RP_Latest_Products_Widget constructor.
 	 *
 	 * @since   3.0.0
 	 * @access  public
@@ -37,7 +37,7 @@ class WPPR_Latest_Products_Widget extends WPPR_Widget_Abstract {
 	 * @access  public
 	 */
 	public function register() {
-		register_widget( 'WPPR_Latest_Products_Widget' );
+		register_widget( 'RP_Latest_Products_Widget' );
 	}
 
 	/**
@@ -54,7 +54,7 @@ class WPPR_Latest_Products_Widget extends WPPR_Widget_Abstract {
 	public function widget( $args, $instance ) {
 		$instance = parent::widget( $args, $instance );
 
-		$reviews = new WPPR_Query_Model();
+		$reviews = new RP_Query_Model();
 		$post    = array();
 		if ( isset( $instance['cwp_tp_category'] ) && trim( $instance['cwp_tp_category'] ) !== '' ) {
 			$post['category_name'] = $instance['cwp_tp_category'];
@@ -69,7 +69,7 @@ class WPPR_Latest_Products_Widget extends WPPR_Widget_Abstract {
 		if ( ! empty( $results ) ) {
 			$first  = reset( $results );
 			$first  = isset( $first['ID'] ) ? $first['ID'] : 0;
-			$review = new WPPR_Review_Model( $first );
+			$review = new RP_Review_Model( $first );
 			$this->assets( $review );
 		}
 		// before and after widget arguments are defined by themes
@@ -78,7 +78,7 @@ class WPPR_Latest_Products_Widget extends WPPR_Widget_Abstract {
 		if ( ! empty( $instance['title'] ) ) {
 			echo $args['before_title'] . $instance['title'] . $args['after_title'];
 		}
-		$template = new WPPR_Template();
+		$template = new RP_Template();
 		$template->render(
 			'widget/' . $instance['cwp_tp_layout'],
 			array(
@@ -109,7 +109,7 @@ class WPPR_Latest_Products_Widget extends WPPR_Widget_Abstract {
 
 		$instance = parent::form( $instance );
 
-		include( WPPR_PATH . '/includes/admin/layouts/widget-admin-tpl.php' );
+		include( RP_PATH . '/includes/admin/layouts/widget-admin-tpl.php' );
 	}
 
 	/**

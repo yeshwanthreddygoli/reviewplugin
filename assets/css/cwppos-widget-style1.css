@@ -1,32 +1,32 @@
-.wppr-prodlist .wppr-prodrow {
+.rp-prodlist .rp-prodrow {
 	width: 100%;
 	padding: 20px 0;
 }
 
-.wppr-prodlist .wppr-prodrow .wppr-prodrowleft {
+.rp-prodlist .rp-prodrow .rp-prodrowleft {
 	float: left;
 	width: 30%;
 }
 
-.wppr-prodlist .wppr-prodrow .wppr-prodrowright {
+.rp-prodlist .rp-prodrow .rp-prodrowright {
 	float: left;
 }
 
-.wppr-prodlist .wppr-prodrow .wppr-prodrowrightadjust {
+.rp-prodlist .rp-prodrow .rp-prodrowrightadjust {
 	width: 65%;
 	margin-left: 3%;
 }
 
-.wppr-prodlist .wppr-prodrow .wppr-prodrowright .wppr-rating {
+.rp-prodlist .rp-prodrow .rp-prodrowright .rp-rating {
 	margin-top: 5px;
 }
 
-.wppr-prodlist .wppr-prodrow .wppr-prodrowright p {
+.rp-prodlist .rp-prodrow .rp-prodrowright p {
 	margin: 0 0 0 0;
 	line-height: 18px;
 }
 
-.wppr-prodlist .wppr-prodrow .wppr-prodrowright .wppr-rating div {
+.rp-prodlist .rp-prodrow .rp-prodrowright .rp-rating div {
 	min-width: 20%;
 }
 
@@ -42,18 +42,18 @@
 	position: absolute;
 }
 
-.wppr-prodlist .wppr-prodrow .wppr-prodrowright .wppr-bttn:first-child {
+.rp-prodlist .rp-prodrow .rp-prodrowright .rp-bttn:first-child {
 	margin-right: 10px;
 }
 
-.wppr-prodlist .wppr-prodrow .wppr-prodrowright p.wppr-style1-buttons {
+.rp-prodlist .rp-prodrow .rp-prodrowright p.rp-style1-buttons {
 	display: block;
 	overflow: hidden;
 	height: 32px;
 	margin-top: 10px;
 }
 
-.wppr-prodlist .wppr-prodrow .wppr-prodrowright .wppr-bttn {
+.rp-prodlist .rp-prodrow .rp-prodrowright .rp-bttn {
 	padding: 6px 9px;
 	border-radius: 3px;
 	color: #fff !important;
@@ -67,15 +67,15 @@
 	transition: all 0.5s ease;
 }
 
-.wppr-prodlist .wppr-prodrow .wppr-prodrowright .bttn:hover {
+.rp-prodlist .rp-prodrow .rp-prodrowright .bttn:hover {
 	opacity: 0.8;
 }
 
-.wppr-prodlist .wppr-prodrow .wppr-prodrowright .wppr-review-stars.rtl .wppr-review-stars-grade i.fa-star-half-o {
+.rp-prodlist .rp-prodrow .rp-prodrowright .rp-review-stars.rtl .rp-review-stars-grade i.fa-star-half-o {
 	-webkit-transform: rotateY(180deg);
 	transform: rotateY(180deg);
 }
 
-.wppr-prodlist .wppr-prodrow .wppr-prodrowright .wppr-review-stars .wppr-review-stars-grade {
+.rp-prodlist .rp-prodrow .rp-prodrowright .rp-review-stars .rp-review-stars-grade {
 	color: #ff7e00;
 }

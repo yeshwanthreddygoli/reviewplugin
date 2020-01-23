@@ -1,7 +1,7 @@
 /* global jQuery */
-/* global wppr */
+/* global rp */
 
-(function($, wppr){
+(function($, rp){
 
     $(document).ready(function(){
         onReady();
@@ -13,18 +13,18 @@
 
     function onReady() {
         // check the is review radio button.
-        $('#wppr-review-yes').attr('checked', 'checked');
+        $('#rp-review-yes').attr('checked', 'checked');
         // hide the radio button settings.
-        $('p.wppr-active').hide();
+        $('p.rp-active').hide();
         // auto show the review settings.
-        $('.wppr-review-editor').show();
+        $('.rp-review-editor').show();
         // hide the product name row.
-        $('#wppr-editor-product-name').parent().hide();
+        $('#rp-editor-product-name').parent().hide();
         // change the title placeholder.
-        $('#title-prompt-text').html(wppr.i10n.title_placeholder);
+        $('#title-prompt-text').html(rp.i10n.title_placeholder);
     }
 
     function onLoad() {
     }
 
-})(jQuery, wppr);
+})(jQuery, rp);

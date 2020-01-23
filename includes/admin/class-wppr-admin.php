@@ -5,8 +5,8 @@
  * @link       https://themeisle.com/
  * @since      3.0.0
  *
- * @package    WPPR
- * @subpackage WPPR/admin
+ * @package    RP
+ * @subpackage RP/admin
  */
 
 /**
@@ -15,11 +15,11 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the admin-specific stylesheet and JavaScript.
  *
- * @package    WPPR
- * @subpackage WPPR/admin
+ * @package    RP
+ * @subpackage RP/admin
  * @author     ThemeIsle <friends@themeisle.com>
  */
-class WPPR_Admin {
+class RP_Admin {
 
 	/**
 	 * The ID of this plugin.
@@ -68,22 +68,22 @@ class WPPR_Admin {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in WPPR_Loader as all of the hooks are defined
+		 * defined in RP_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The WPPR_Loader will then create the relationship
+		 * The RP_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
 
 		switch ( $hook ) {
-			case 'toplevel_page_wppr':
+			case 'toplevel_page_rp':
 				wp_enqueue_style( 'wp-color-picker' );
-				wp_enqueue_style( $this->plugin_name . '-dashboard-css', WPPR_URL . '/assets/css/dashboard_styles.css', array(), $this->version );
-				wp_enqueue_style( $this->plugin_name . '-admin-css', WPPR_URL . '/assets/css/admin.css', array(), $this->version );
+				wp_enqueue_style( $this->plugin_name . '-dashboard-css', RP_URL . '/assets/css/dashboard_styles.css', array(), $this->version );
+				wp_enqueue_style( $this->plugin_name . '-admin-css', RP_URL . '/assets/css/admin.css', array(), $this->version );
 				// fall-through
-			case 'product-review_page_wppr-support':
-				wp_enqueue_style( $this->plugin_name . '-upsell-css', WPPR_URL . '/assets/css/support.css', array(), $this->version );
+			case 'product-review_page_rp-support':
+				wp_enqueue_style( $this->plugin_name . '-upsell-css', RP_URL . '/assets/css/support.css', array(), $this->version );
 				break;
 			case 'post.php':
 				// fall through.
@@ -108,22 +108,22 @@ class WPPR_Admin {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in WPPR_Loader as all of the hooks are defined
+		 * defined in RP_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The WPPR_Loader will then create the relationship
+		 * The RP_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
 
 		switch ( $hook ) {
-			case 'toplevel_page_wppr':
-				wp_enqueue_script( $this->plugin_name . '-admin-js', WPPR_URL . '/assets/js/admin.js', array( 'jquery', 'wp-color-picker' ), $this->version );
+			case 'toplevel_page_rp':
+				wp_enqueue_script( $this->plugin_name . '-admin-js', RP_URL . '/assets/js/admin.js', array( 'jquery', 'wp-color-picker' ), $this->version );
 				break;
 			case 'post.php':
 				// fall through.
 			case 'post-new.php':
-				wp_enqueue_script( $this->plugin_name . '-post', WPPR_URL . '/assets/js/post.js', array( 'jquery-ui-accordion' ), $this->version );
+				wp_enqueue_script( $this->plugin_name . '-post', RP_URL . '/assets/js/post.js', array( 'jquery-ui-accordion' ), $this->version );
 				break;
 		}
 
@@ -141,7 +141,7 @@ class WPPR_Admin {
 			__( 'WP Product Review', 'wp-product-review' ),
 			__( 'Product Review', 'wp-product-review' ),
 			'manage_options',
-			'wppr',
+			'rp',
 			array(
 				$this,
 				'page_settings',
@@ -151,11 +151,11 @@ class WPPR_Admin {
 		);
 
 		add_submenu_page(
-			'wppr',
+			'rp',
 			__( 'Support', 'wp-product-review' ),
 			__( 'Support', 'wp-product-review' ) . '<span class="dashicons dashicons-editor-help more-features-icon" style="width: 17px; height: 17px; margin-left: 4px; color: #ffca54; font-size: 17px; vertical-align: -3px;"></span>',
 			'manage_options',
-			'wppr-support',
+			'rp-support',
 			array(
 				$this,
 				'render_support',
@@ -170,8 +170,8 @@ class WPPR_Admin {
 	 * @access  public
 	 */
 	public function page_settings() {
-		$model  = new WPPR_Options_Model();
-		$render = new WPPR_Admin_Render_Controller( $this->plugin_name, $this->version );
+		$model  = new RP_Options_Model();
+		$render = new RP_Admin_Render_Controller( $this->plugin_name, $this->version );
 		$render->retrive_template( 'settings', $model );
 	}
 
@@ -182,7 +182,7 @@ class WPPR_Admin {
 	 * @access  public
 	 */
 	public function render_support() {
-		$render = new WPPR_Admin_Render_Controller( $this->plugin_name, $this->version );
+		$render = new RP_Admin_Render_Controller( $this->plugin_name, $this->version );
 		$render->retrive_template( 'support' );
 	}
 
@@ -199,16 +199,16 @@ class WPPR_Admin {
 		if ( ! isset( $nonce['name'] ) ) {
 			die( 'invalid nonce field' );
 		}
-		if ( $nonce['name'] !== 'wppr_nonce_settings' ) {
+		if ( $nonce['name'] !== 'rp_nonce_settings' ) {
 			die( 'invalid nonce name' );
 		}
-		if ( wp_verify_nonce( $nonce['value'], 'wppr_save_global_settings' ) !== 1 ) {
+		if ( wp_verify_nonce( $nonce['value'], 'rp_save_global_settings' ) !== 1 ) {
 			die( 'invalid nonce value' );
 		}
 
-		$model = new WPPR_Query_Model();
+		$model = new RP_Query_Model();
 
-		$comment_influence = intval( $model->wppr_get_option( 'cwppos_infl_userreview' ) );
+		$comment_influence = intval( $model->rp_get_option( 'cwppos_infl_userreview' ) );
 
 		if ( 0 === $comment_influence ) {
 			die();
@@ -216,7 +216,7 @@ class WPPR_Admin {
 
 		$ids    = $model->find_all_reviews();
 		foreach ( $ids as $id ) {
-			$review = new WPPR_Review_Model( $id );
+			$review = new RP_Review_Model( $id );
 			$review->update_comments_rating();
 		}
 
@@ -230,28 +230,28 @@ class WPPR_Admin {
 	 * @access  public
 	 */
 	public function update_options() {
-		$model = new WPPR_Options_Model();
+		$model = new RP_Options_Model();
 		$data  = $_POST['cwppos_options'];
 
 		$nonce = $data[ count( $data ) - 1 ];
 		if ( ! isset( $nonce['name'] ) ) {
 			die( 'invalid nonce field' );
 		}
-		if ( $nonce['name'] !== 'wppr_nonce_settings' ) {
+		if ( $nonce['name'] !== 'rp_nonce_settings' ) {
 			die( 'invalid nonce name' );
 		}
-		if ( wp_verify_nonce( $nonce['value'], 'wppr_save_global_settings' ) !== 1 ) {
+		if ( wp_verify_nonce( $nonce['value'], 'rp_save_global_settings' ) !== 1 ) {
 			die( 'invalid nonce value' );
 		}
 
 		foreach ( $data as $option ) {
-			$model->wppr_set_option( $option['name'], $option['value'] );
+			$model->rp_set_option( $option['name'], $option['value'] );
 		}
 
 		// delete the transients for AMP.
-		$templates = apply_filters( 'wppr_review_templates', array( 'default', 'style1', 'style2' ) );
+		$templates = apply_filters( 'rp_review_templates', array( 'default', 'style1', 'style2' ) );
 		foreach ( $templates as $template ) {
-			delete_transient( '_wppr_amp_css_' . str_replace( '.', '_', $this->version ) . '_' . $template );
+			delete_transient( '_rp_amp_css_' . str_replace( '.', '_', $this->version ) . '_' . $template );
 		}
 		die();
 	}
@@ -263,7 +263,7 @@ class WPPR_Admin {
 	 * @access  public
 	 */
 	public function get_taxonomies() {
-		check_ajax_referer( WPPR_SLUG, 'nonce' );
+		check_ajax_referer( RP_SLUG, 'nonce' );
 
 		if ( isset( $_POST['type'] ) ) {
 			echo wp_send_json_success( array( 'categories' => self::get_taxonomy_and_terms_for_post_type( $_POST['type'] ) ) );
@@ -278,7 +278,7 @@ class WPPR_Admin {
 	 * @access  public
 	 */
 	public function get_categories() {
-		check_ajax_referer( WPPR_SLUG, 'nonce' );
+		check_ajax_referer( RP_SLUG, 'nonce' );
 
 		if ( isset( $_POST['type'] ) ) {
 			echo wp_send_json_success( array( 'categories' => self::get_category_for_post_type( $_POST['type'] ) ) );
@@ -376,7 +376,7 @@ class WPPR_Admin {
 		add_filter( 'parse_query', array( $this, 'show_only_review_posts' ), 10 );
 
 		// add columns to post listing.
-		$post_types     = apply_filters( 'wppr_post_types_custom_columns', array() );
+		$post_types     = apply_filters( 'rp_post_types_custom_columns', array() );
 		if ( $post_types ) {
 			foreach ( $post_types as $post_type ) {
 				$type   = in_array( $post_type, array( 'post', 'page' ), true ) ? "{$post_type}s" : "{$post_type}_posts";
@@ -395,15 +395,15 @@ class WPPR_Admin {
 	 * @access  public
 	 */
 	public function restrict_manage_posts( $post_type, $which ) {
-		$post_types     = apply_filters( 'wppr_post_types_custom_filter', array( 'post', 'page' ) );
+		$post_types     = apply_filters( 'rp_post_types_custom_filter', array( 'post', 'page' ) );
 		if ( ! $post_types || ! in_array( $post_type, $post_types, true ) ) {
 			return;
 		}
 
-		echo "<select name='wppr_filter' id='wppr_filter' class='postform'>";
+		echo "<select name='rp_filter' id='rp_filter' class='postform'>";
 		echo "<option value=''>" . __( 'Show All', 'wp-product-review' ) . '</option>';
-		$selected   = isset( $_REQUEST['wppr_filter'] ) && 'only-wppr' === $_REQUEST['wppr_filter'] ? 'selected' : '';
-		echo "<option value='only-wppr' $selected>" . __( 'Show only Reviews', 'wp-product-review' ) . '</option>';
+		$selected   = isset( $_REQUEST['rp_filter'] ) && 'only-rp' === $_REQUEST['rp_filter'] ? 'selected' : '';
+		echo "<option value='only-rp' $selected>" . __( 'Show only Reviews', 'wp-product-review' ) . '</option>';
 		echo '</select>';
 	}
 
@@ -417,11 +417,11 @@ class WPPR_Admin {
 			return $query;
 		}
 
-		if ( ! isset( $_REQUEST['wppr_filter'] ) || 'only-wppr' !== $_REQUEST['wppr_filter'] ) {
+		if ( ! isset( $_REQUEST['rp_filter'] ) || 'only-rp' !== $_REQUEST['rp_filter'] ) {
 			return $query;
 		}
 
-		$post_types     = apply_filters( 'wppr_post_types_custom_filter', array( 'post', 'page' ) );
+		$post_types     = apply_filters( 'rp_post_types_custom_filter', array( 'post', 'page' ) );
 		if ( ! in_array( $query->query['post_type'], $post_types, true ) ) {
 			return $query;
 		}
@@ -444,7 +444,7 @@ class WPPR_Admin {
 	 * @access  public
 	 */
 	public function manage_posts_columns( $columns ) {
-		$columns['wppr_review']    = __( 'Review Rating', 'wp-product-review' );
+		$columns['rp_review']    = __( 'Review Rating', 'wp-product-review' );
 		return $columns;
 	}
 
@@ -454,7 +454,7 @@ class WPPR_Admin {
 	 * @access  public
 	 */
 	public function sort_posts_custom_column( $columns ) {
-		$columns['wppr_review'] = 'wppr_review';
+		$columns['rp_review'] = 'rp_review';
 		return $columns;
 	}
 	/**
@@ -464,8 +464,8 @@ class WPPR_Admin {
 	 */
 	public function manage_posts_custom_column( $column, $id ) {
 		switch ( $column ) {
-			case 'wppr_review':
-				$model = new WPPR_Review_Model( $id );
+			case 'rp_review':
+				$model = new RP_Review_Model( $id );
 				echo $model->get_rating();
 				break;
 		}
@@ -480,13 +480,13 @@ class WPPR_Admin {
 		if ( ! isset( $current_screen->id ) ) {
 			return;
 		}
-		if ( $current_screen->id !== 'wppr_review' ) {
+		if ( $current_screen->id !== 'rp_review' ) {
 			return;
 		}
 
 		wp_enqueue_script(
 			$this->plugin_name . '-cpt-js',
-			WPPR_URL . '/assets/js/cpt.js',
+			RP_URL . '/assets/js/cpt.js',
 			array(
 				'jquery',
 			),
@@ -495,7 +495,7 @@ class WPPR_Admin {
 
 		wp_localize_script(
 			$this->plugin_name . '-cpt-js',
-			'wppr',
+			'rp',
 			array(
 				'i10n' => array(
 					'title_placeholder' => __( 'Enter Review Title', 'wp-product-review' ),
@@ -508,14 +508,14 @@ class WPPR_Admin {
 	 * Loads the additional fields for the CPT.
 	 */
 	private function get_additional_fields_for_cpt() {
-		$model = new WPPR_Query_Model();
-		if ( 'yes' !== $model->wppr_get_option( 'wppr_cpt' ) ) {
+		$model = new RP_Query_Model();
+		if ( 'yes' !== $model->rp_get_option( 'rp_cpt' ) ) {
 			return;
 		}
 
-		add_filter( 'manage_wppr_review_posts_columns', array( $this, 'manage_cpt_columns' ), 10, 1 );
-		add_action( 'manage_wppr_review_posts_custom_column', array( $this, 'manage_cpt_custom_column' ), 10, 2 );
-		add_filter( 'manage_edit-wppr_review_sortable_columns', array( $this, 'sort_cpt_custom_column' ), 10, 1 );
+		add_filter( 'manage_rp_review_posts_columns', array( $this, 'manage_cpt_columns' ), 10, 1 );
+		add_action( 'manage_rp_review_posts_custom_column', array( $this, 'manage_cpt_custom_column' ), 10, 2 );
+		add_filter( 'manage_edit-rp_review_sortable_columns', array( $this, 'sort_cpt_custom_column' ), 10, 1 );
 		add_action( 'pre_get_posts', array( $this, 'sort_cpt_custom_column_order') );
 	}
 
@@ -526,8 +526,8 @@ class WPPR_Admin {
 	 */
 	public function manage_cpt_columns( $columns ) {
 		$custom     = array(
-			'wppr_price' => __( 'Product Price', 'wp-product-review' ),
-			'wppr_rating' => __( 'Rating', 'wp-product-review' ),
+			'rp_price' => __( 'Product Price', 'wp-product-review' ),
+			'rp_rating' => __( 'Rating', 'wp-product-review' ),
 		);
 
 		// add before the date column.
@@ -541,20 +541,20 @@ class WPPR_Admin {
 	 */
 	public function manage_cpt_custom_column( $column, $id ) {
 		switch ( $column ) {
-			case 'wppr_price':
-				$model = new WPPR_Review_Model( $id );
+			case 'rp_price':
+				$model = new RP_Review_Model( $id );
 				echo $model->get_price();
 				break;
-			case 'wppr_rating':
-				$model = new WPPR_Review_Model( $id );
+			case 'rp_rating':
+				$model = new RP_Review_Model( $id );
 				// save the rating as a temporary post meta which can be used in pre_get_posts
 				add_filter(
-					'wppr_rating', function( $rating, $id ) {
-					update_post_meta( $id, '_wppr_rating_num_temp', $rating );
+					'rp_rating', function( $rating, $id ) {
+					update_post_meta( $id, '_rp_rating_num_temp', $rating );
 					return $rating;
 					}, 10, 2
 				);
-				echo wppr_layout_get_rating( $model, 'stars', '' );
+				echo rp_layout_get_rating( $model, 'stars', '' );
 				break;
 		}
 	}
@@ -565,7 +565,7 @@ class WPPR_Admin {
 	 * @access  public
 	 */
 	public function sort_cpt_custom_column( $columns ) {
-		$columns['wppr_rating'] = 'wppr_rating_num';
+		$columns['rp_rating'] = 'rp_rating_num';
 		return $columns;
 	}
 
@@ -582,8 +582,8 @@ class WPPR_Admin {
 		$orderby = $query->get( 'orderby' );
 
 		switch ( $orderby ) {
-			case 'wppr_rating_num':
-				$query->set( 'meta_key', '_wppr_rating_num_temp' );
+			case 'rp_rating_num':
+				$query->set( 'meta_key', '_rp_rating_num_temp' );
 				$query->set( 'orderby', 'meta_value_num' );
 				break;
 		}
@@ -597,7 +597,7 @@ class WPPR_Admin {
 	 */
 	public function settings_section_upsell( $section ) {
 		if ( 'general' === $section ) {
-			echo '<label class="wppr-upsell-label"> You can display the review using the <b>[P_REVIEW]</b> shortcode. You can read more about it <a href="https://docs.themeisle.com/article/449-wp-product-review-shortcode-documentation" target="_blank">here</a></label>';
+			echo '<label class="rp-upsell-label"> You can display the review using the <b>[P_REVIEW]</b> shortcode. You can read more about it <a href="https://docs.themeisle.com/article/449-wp-product-review-shortcode-documentation" target="_blank">here</a></label>';
 		}
 	}
 
@@ -605,7 +605,7 @@ class WPPR_Admin {
 	 * Add a custom image size for widgets.
 	 */
 	public function add_image_size() {
-		add_image_size( 'wppr-widget', 50, 50 );
+		add_image_size( 'rp-widget', 50, 50 );
 	}
 
 	/**
@@ -618,8 +618,8 @@ class WPPR_Admin {
 			return;
 		}
 
-		if ( $plugin === WPPR_BASENAME ) {
-			wp_redirect( admin_url( 'admin.php?page=wppr-support&tab=help#shortcode' ) );
+		if ( $plugin === RP_BASENAME ) {
+			wp_redirect( admin_url( 'admin.php?page=rp-support&tab=help#shortcode' ) );
 			exit();
 		}
 	}

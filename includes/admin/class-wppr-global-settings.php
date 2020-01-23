@@ -1,8 +1,8 @@
 <?php
 /**
- * The main loader file for wppr.
+ * The main loader file for rp.
  *
- * @package WPPR
+ * @package RP
  * @subpackage Settings
  * @copyright   Copyright (c) 2017, Marius Cristea
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
@@ -15,15 +15,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class WPPR_Global_Settings for handling global options.
+ * Class RP_Global_Settings for handling global options.
  */
-class WPPR_Global_Settings {
+class RP_Global_Settings {
 	/**
 	 * The main instance var.
 	 *
 	 * @since   3.0.0
 	 * @access  public
-	 * @var WPPR_Global_Settings The one WPPR_Global_Settings istance.
+	 * @var RP_Global_Settings The one RP_Global_Settings istance.
 	 */
 	public static $instance;
 
@@ -51,13 +51,13 @@ class WPPR_Global_Settings {
 	 *
 	 * @since   3.0.0
 	 * @access  public
-	 * @return WPPR_Global_Settings
+	 * @return RP_Global_Settings
 	 */
 	public static function instance() {
-		if ( ! isset( self::$instance ) && ! ( self::$instance instanceof WPPR_Global_Settings ) ) {
-			self::$instance           = new WPPR_Global_Settings;
+		if ( ! isset( self::$instance ) && ! ( self::$instance instanceof RP_Global_Settings ) ) {
+			self::$instance           = new RP_Global_Settings;
 			self::$instance->sections = apply_filters(
-				'wppr_settings_sections',
+				'rp_settings_sections',
 				array(
 					'general'    => __( 'General settings', 'wp-product-review' ),
 					'rating'     => __( 'Rating colors', 'wp-product-review' ),
@@ -72,12 +72,12 @@ class WPPR_Global_Settings {
 				'no'     => __( 'Before content', 'wp-product-review' ),
 			);
 
-			if ( defined( 'WPPR_PRO_VERSION' ) ) {
+			if ( defined( 'RP_PRO_VERSION' ) ) {
 				$placement['manual']    = __( 'Manually placed', 'wp-product-review' );
 			}
 
 			self::$instance->fields   = apply_filters(
-				'wppr_settings_fields',
+				'rp_settings_fields',
 				array(
 					'general'    => array(
 						'cwppos_show_reviewbox'  => array(
@@ -100,7 +100,7 @@ class WPPR_Global_Settings {
 							'disabled'    => ! self::enable_user_comments(),
 							'default'     => 'no',
 						),
-						'wppr_use_5_rating_scale' => array(
+						'rp_use_5_rating_scale' => array(
 							'id'          => 'use_5_rating_scale',
 							'name'        => __( 'Rating scale', 'wp-product-review' ),
 							'description' => __( 'On what scale should reviews be rated?', 'wp-product-review' ),
@@ -111,7 +111,7 @@ class WPPR_Global_Settings {
 								'10'  => __( 'On 10', 'wp-product-review' ),
 							),
 						),
-						'wppr_comment_rating' => array(
+						'rp_comment_rating' => array(
 							'id'          => 'comment_rating',
 							'name'        => __( 'Comment rating style', 'wp-product-review' ),
 							'description' => __( 'What type of rating style would you like to use?', 'wp-product-review' ),
@@ -178,7 +178,7 @@ class WPPR_Global_Settings {
 							),
 							'default'     => 'no',
 						),
-						'wppr_rich_snippet'      => array(
+						'rp_rich_snippet'      => array(
 							'type'        => 'select',
 							'name'        => __( 'Enable Rich Snippets', 'wp-product-review' ),
 							'description' => __( 'Enable rich snippets on the product page.', 'wp-product-review' ),
@@ -189,7 +189,7 @@ class WPPR_Global_Settings {
 							),
 							'default'     => 'yes',
 						),
-						'wppr_cpt'      => array(
+						'rp_cpt'      => array(
 							'type'        => 'select',
 							'name'        => __( 'Enable review post type', 'wp-product-review' ),
 							'description' => __( 'Enabling this will create a new post type where you can manage your reviews. Refresh the page on saving changes to see the "Reviews" menu on the left.', 'wp-product-review' ),
@@ -200,11 +200,11 @@ class WPPR_Global_Settings {
 							),
 							'default'     => 'no',
 						),
-						'wppr_amp'      => array(
+						'rp_amp'      => array(
 							'type'        => 'select',
 							'name'        => __( 'Enable AMP CSS.', 'wp-product-review' ),
 							'description' => __( 'Enabling this will result in including custom CSS for AMP.', 'wp-product-review' ),
-							'id'          => 'wppr_amp',
+							'id'          => 'rp_amp',
 							'options'     => array(
 								'yes' => __( 'Yes', 'wp-product-review' ),
 								'no'  => __( 'No', 'wp-product-review' ),
@@ -367,7 +367,7 @@ class WPPR_Global_Settings {
 						'cwppos_reset_comment_ratings'        => array(
 							'type'        => 'button',
 							'placeholder' => __( 'Recalculate', 'wp-product-review' ),
-							'class'       => 'wppr_reset_comment_ratings',
+							'class'       => 'rp_reset_comment_ratings',
 							'name'        => __( 'Recalculate comment ratings', 'wp-product-review' ),
 							'description' => __( 'Use this if the comment rating influence is being incorrectly determined and it needs to be recalculated. Use this only if \'Visitor Review Influence\' is enabled.', 'wp-product-review' ),
 							'id'          => 'reset_comment_ratings',

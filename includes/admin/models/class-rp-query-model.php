@@ -1,50 +1,14 @@
 <?php
-/**
- * The file that defines a model class for easier access to DB
- * functionality, an abstract layer for core and addons to use.
- *
- * @link       https://themeisle.com
- * @since      2.0.0
- *
- * @package    WPPR_Pro
- * @subpackage WPPR_Pro/includes/models
- */
 
-/**
- * Class WPPR_Query_Model
- *
- * A model class for abstracting DB actions.
- *
- * @since       2.0.0
- * @package     WPPR_Pro
- * @subpackage  WPPR_Pro/includes/model
- */
-class WPPR_Query_Model extends WPPR_Model_Abstract {
+class RP_Query_Model extends RP_Model_Abstract {
 
-	/**
-	 * Holds an instance of WPPR_Review_Model
-	 *
-	 * @since   2.0.0
-	 * @access  protected
-	 * @var     WPPR_Review_Model $review Holds an instance of WPPR_Review_Model.
-	 */
+	
 	protected $review;
 
-	/**
-	 * Holds an instance of the WP DB Object
-	 *
-	 * @since   2.0.0
-	 * @access  private
-	 * @var     WPDB $db Holds an instance of the WP DB Object.
-	 */
+
 	private $db;
 
-	/**
-	 * WPPR_Pro_Model constructor.
-	 *
-	 * @since   2.0.0
-	 * @access  public
-	 */
+	
 	public function __construct() {
 		parent::__construct();
 
@@ -52,19 +16,7 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 		$this->db = $wpdb;
 	}
 
-	/**
-	 * Utility method to return products by category ID.
-	 *
-	 * @since   2.0.0
-	 * @access  public
-	 *
-	 * @param   int         $cat_id The category ID.
-	 * @param   int         $limit Optional. The results limit.
-	 * @param   array|false $filter Optional. The filter array.
-	 * @param   array|false $order Optional. The order array.
-	 *
-	 * @return array
-	 */
+	
 	public function find_by_cat_id( $cat_id, $limit = 20, $filter = array(), $order = array() ) {
 		return $this->find(
 			array(
@@ -76,19 +28,7 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 		);
 	}
 
-	/**
-	 * Mai utility method to retrive an array of products.
-	 *
-	 * @since   2.0.0
-	 * @access  public
-	 *
-	 * @param   array|false $post The post data to filter by.
-	 * @param   int         $limit The limit for the returned results.
-	 * @param   array|false $filter The fields to filter data by.
-	 * @param   array|false $order The fields to order by and the order.
-	 *
-	 * @return array
-	 */
+	
 	public function find(
 		$post = array(
 			'category_id'           => false,
@@ -113,8 +53,8 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 		}
 		if ( ! isset( $post['post_type'] ) ) {
 			$types          = array( 'post', 'page' );
-			if ( 'yes' === $this->wppr_get_option( 'wppr_cpt' ) ) {
-				$types[]    = 'wppr_review';
+			if ( 'yes' === $this->rp_get_option( 'rp_cpt' ) ) {
+				$types[]    = 'rp_review';
 			}
 			$post['post_type'] = $types;
 		}
@@ -132,7 +72,7 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 		}
 
 		$final_rating       = '`rating`';
-		$comment_influence = intval( $this->wppr_get_option( 'cwppos_infl_userreview' ) );
+		$comment_influence = intval( $this->rp_get_option( 'cwppos_infl_userreview' ) );
 		if ( $comment_influence > 0 ) {
 			$final_rating   = "IF(`comment_rating` = 0, `rating`, (`comment_rating` * 10 * ( $comment_influence / 100 ) + `rating` * ( ( 100 - $comment_influence ) / 100 ) ) )";
 		}
@@ -149,8 +89,8 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
             GROUP_CONCAT( DISTINCT IF( `meta_key` = 'cwp_meta_box_check', `meta_value`, '' ) SEPARATOR '' ) AS 'check', 
             GROUP_CONCAT( DISTINCT IF( `meta_key` = 'cwp_rev_product_name', `meta_value`, '' ) SEPARATOR '' ) AS 'name',   
             GROUP_CONCAT( DISTINCT IF( `meta_key` = 'cwp_rev_price', FORMAT( `meta_value`, 2 ), '' ) SEPARATOR '' ) AS 'price', 
-			GROUP_CONCAT( DISTINCT IF( `meta_key` = 'wppr_rating', IF(FORMAT(`meta_value`, 2) = '100.00','99.99', FORMAT(`meta_value`, 2) ), '') SEPARATOR '' ) AS 'rating',
-            GROUP_CONCAT( DISTINCT IF( `meta_key` = 'wppr_comment_rating', `meta_value`, '') SEPARATOR '' ) AS 'comment_rating'
+			GROUP_CONCAT( DISTINCT IF( `meta_key` = 'rp_rating', IF(FORMAT(`meta_value`, 2) = '100.00','99.99', FORMAT(`meta_value`, 2) ), '') SEPARATOR '' ) AS 'rating',
+            GROUP_CONCAT( DISTINCT IF( `meta_key` = 'rp_comment_rating', `meta_value`, '') SEPARATOR '' ) AS 'comment_rating'
         FROM {$this->db->postmeta} m INNER JOIN {$this->db->posts} p on p.ID = m.post_ID
         
         {$sub_query_posts}
@@ -166,14 +106,14 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 		) T1 $final_order
         ";
 
-		do_action( 'themeisle_log_event', WPPR_SLUG, sprintf( 'post = %s, limit = %s, filter = %s, order = %s and query = %s', print_r( $post, true ), $limit, print_r( $filter, true ), print_r( $order, true ), $query ), 'debug', __FILE__, __LINE__ );
+		do_action( 'themeisle_log_event', RP_SLUG, sprintf( 'post = %s, limit = %s, filter = %s, order = %s and query = %s', print_r( $post, true ), $limit, print_r( $filter, true ), print_r( $order, true ), $query ), 'debug', __FILE__, __LINE__ );
 
 		$key     = hash( 'sha256', $query );
-		$results = wp_cache_get( $key, 'wppr' );
+		$results = wp_cache_get( $key, 'rp' );
 		if ( ! is_array( $results ) ) {
 			$results = $this->db->get_results( $query, ARRAY_A );
-			if ( ! WPPR_CACHE_DISABLED ) {
-				wp_cache_set( $key, $results, 'wppr', ( 60 * 60 ) );
+			if ( ! RP_CACHE_DISABLED ) {
+				wp_cache_set( $key, $results, 'rp', ( 60 * 60 ) );
 			}
 		}// End if().
 
@@ -181,23 +121,14 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 	}
 
 
-	/**
-	 * Build the sub query.
-	 *
-	 * @since   2.0.0
-	 * @access  private
-	 *
-	 * @param   array|false $post The post data to filter by.
-	 *
-	 * @return string
-	 */
+	
 	private function get_sub_query_posts( $post ) {
-		// TODO Build validation methods for category name and id and reuse them here and in get_sub_query_conditions method.
+		
 		if ( ! isset( $post['category_name'] ) && ! isset( $post['category_id'] ) ) {
 			return '';
 		}
 
-		$category   = 'yes' === $this->wppr_get_option( 'wppr_cpt' ) ? 'wppr_category' : 'category';
+		$category   = 'yes' === $this->rp_get_option( 'rp_cpt' ) ? 'rp_category' : 'category';
 		if ( isset( $post['taxonomy_name'] ) ) {
 			$category = $post['taxonomy_name'];
 		}
@@ -209,22 +140,13 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 		return $sub_selection_query;
 	}
 
-	/**
-	 * Build the order by query part.
-	 *
-	 * @since   2.0.0
-	 * @access  private
-	 *
-	 * @param   array|false $order The fields to order by and the order.
-	 *
-	 * @return string
-	 */
+	
 	private function get_order_by( $order ) {
 		$order_by = '';
 		if ( isset( $order['rating'] ) && in_array( $order['rating'], array( 'ASC', 'DESC' ), true ) ) {
 			$column = 'rating';
-			// if user influence is on, we should sort by comment_rating.
-			$comment_influence = intval( $this->wppr_get_option( 'cwppos_infl_userreview' ) );
+			
+			$comment_influence = intval( $this->rp_get_option( 'cwppos_infl_userreview' ) );
 			if ( $comment_influence > 0 ) {
 				$column = 'comment_rating';
 			}
@@ -238,22 +160,12 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 			$order_by .= "`post_date` {$order['date']}, ";
 		}
 
-		$order_by       .= apply_filters( 'wppr_order_by_clause', '', $order );
+		$order_by       .= apply_filters( 'rp_order_by_clause', '', $order );
 
 		return $order_by;
 	}
 
-	/**
-	 * Build the query conditions.
-	 *
-	 * @since   2.0.0
-	 * @access  private
-	 *
-	 * @param   array|false $post The fields to filter data by.
-	 * @param   array|false $filter The post details to filter data by.
-	 *
-	 * @return array
-	 */
+
 	private function get_query_conditions( $post, $filter ) {
 		$conditions          = array( 'where' => '', 'having' => '' );
 		$conditions['where'] = $this->get_sub_query_conditions( $post );
@@ -261,30 +173,21 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 			$conditions['having'] .= $this->db->prepare( ' AND `name` LIKE %s ', '%' . $filter['name'] . '%' );
 		}
 
-		// TODO comparision arguments for price filter.
+		
 		if ( isset( $filter['price'] ) && $filter['price'] !== false && is_numeric( $filter['price'] ) ) {
 			$conditions['having'] .= $this->db->prepare( ' AND `price` > FORMAT( %d, 2 ) ', $filter['price'] );
 		}
-		// TODO comparision arguments for rating filter.
+		
 		if ( isset( $filter['rating'] ) && $filter['rating'] !== false && is_numeric( $filter['rating'] ) ) {
 			$conditions['having'] .= $this->db->prepare( ' AND `rating`  > %f ', $filter['rating'] );
 		}
 
-		$conditions     = apply_filters( 'wppr_where_clause', $conditions, $post, $filter );
+		$conditions     = apply_filters( 'rp_where_clause', $conditions, $post, $filter );
 
 		return $conditions;
 	}
 
-	/**
-	 * Build the sub query conditions.
-	 *
-	 * @since   2.0.0
-	 * @access  private
-	 *
-	 * @param   array|false $post The post data to filter by.
-	 *
-	 * @return string
-	 */
+	
 	private function get_sub_query_conditions( $post ) {
 		$sub_query_conditions = '';
 		if ( isset( $post['category_id'] ) && $post['category_id'] !== false && is_numeric( $post['category_id'] ) && $post['category_id'] > 0 ) {
@@ -294,7 +197,7 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 		if ( isset( $post['category_name'] ) && $post['category_name'] !== false ) {
 			$sub_query_conditions .= $this->db->prepare( ' AND wt.slug = %s ', $post['category_name'] );
 		}
-		// TODO Check against available post_types.
+		
 		if ( isset( $post['post_type'] ) && is_array( $post['post_type'] ) ) {
 			$filter_post_type      = array_fill( 0, count( $post['post_type'] ), ' p.post_type = %s ' );
 			$filter_post_type      = implode( ' OR ', $filter_post_type );
@@ -319,24 +222,12 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 			}
 		}
 
-		$sub_query_conditions       .= apply_filters( 'wppr_where_sub_clause', '', $post );
+		$sub_query_conditions       .= apply_filters( 'rp_where_sub_clause', '', $post );
 
 		return $sub_query_conditions;
 	}
 
-	/**
-	 * Utility method to return products by category name.
-	 *
-	 * @since   2.0.0
-	 * @access  public
-	 *
-	 * @param   string      $category The category name.
-	 * @param   int         $limit Optional. The results limit.
-	 * @param   array|false $filter Optional. The filter array.
-	 * @param   array|false $order Optional. The order array.
-	 *
-	 * @return array
-	 */
+
 	public function find_by_category( $category, $limit = 20, $filter = array(), $order = array() ) {
 		return $this->find(
 			array(
@@ -348,17 +239,7 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 		);
 	}
 
-	/**
-	 * Utility method to find a product or more by name.
-	 *
-	 * @since   2.0.0
-	 * @access  public
-	 *
-	 * @param   string $name The name to look for.
-	 * @param   int    $limit Optional. The results limit.
-	 *
-	 * @return array
-	 */
+
 	public function find_by_name( $name, $limit = 20 ) {
 		return $this->find(
 			false,
@@ -369,17 +250,7 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 		);
 	}
 
-	/**
-	 * Utility method to find a product or more by price.
-	 *
-	 * @since   2.0.0
-	 * @access  public
-	 *
-	 * @param   float|int $price The price to look for.
-	 * @param   int       $limit Optional. The results limit.
-	 *
-	 * @return array
-	 */
+	
 	public function find_by_price( $price, $limit = 20 ) {
 		return $this->find(
 			false,
@@ -390,17 +261,7 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 		);
 	}
 
-	/**
-	 * Utility method to find a product or more by price.
-	 *
-	 * @since   2.0.0
-	 * @access  public
-	 *
-	 * @param   float|int $rating The rating to look for.
-	 * @param   int       $limit Optional. The results limit.
-	 *
-	 * @return array
-	 */
+	
 	public function find_by_rating( $rating, $limit = 20 ) {
 		return $this->find(
 			false,
@@ -411,19 +272,12 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 		);
 	}
 
-	/**
-	 * Utility method to find all reviews.
-	 *
-	 * @since   ?
-	 * @access  public
-	 *
-	 * @return array
-	 */
+
 	public function find_all_reviews() {
-		$type   = apply_filters( 'wppr_find_all_reviews_post_types', ( 'yes' === $this->wppr_get_option( 'wppr_cpt' ) ? array( 'wppr_review' ) : array( 'post', 'page' ) ) );
+		$type   = apply_filters( 'rp_find_all_reviews_post_types', ( 'yes' === $this->rp_get_option( 'rp_cpt' ) ? array( 'rp_review' ) : array( 'post', 'page' ) ) );
 		$query  = new WP_Query(
 			apply_filters(
-				'wppr_find_all_reviews', array(
+				'rp_find_all_reviews', array(
 					'post_type'     => $type,
 					'post_status'   => 'publish',
 					'fields'        => 'ids',

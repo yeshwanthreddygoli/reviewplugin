@@ -1,8 +1,8 @@
 <?php
 /**
- * The WPPR Top Reviews Widget Class.
+ * The RP Top Reviews Widget Class.
  *
- * @package WPPR
+ * @package RP
  * @subpackage Widget
  * @copyright   Copyright (c) 2017, Bogdan Preda
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
@@ -10,19 +10,19 @@
  */
 
 /**
- * Class WPPR_Top_Reviews_Widget
+ * Class RP_Top_Reviews_Widget
  */
-class WPPR_Top_Reviews_Widget extends WPPR_Widget_Abstract {
+class RP_Top_Reviews_Widget extends RP_Widget_Abstract {
 
 	/**
-	 * WPPR_Top_Reviews_Widget constructor.
+	 * RP_Top_Reviews_Widget constructor.
 	 *
 	 * @since   3.0.0
 	 * @access  public
 	 */
 	public function __construct() {
 		parent::__construct(
-			'wppr_top_reviews_widget',
+			'rp_top_reviews_widget',
 			__( 'Top Review Widget', 'wp-product-review' ),
 			array(
 				'description' => __( 'This widget displays the top reviews based on the rating.', 'wp-product-review' ),
@@ -37,7 +37,7 @@ class WPPR_Top_Reviews_Widget extends WPPR_Widget_Abstract {
 	 * @access  public
 	 */
 	public function register() {
-		register_widget( 'WPPR_Top_Reviews_Widget' );
+		register_widget( 'RP_Top_Reviews_Widget' );
 	}
 
 	/**
@@ -69,7 +69,7 @@ class WPPR_Top_Reviews_Widget extends WPPR_Widget_Abstract {
 
 		$instance = parent::widget( $args, $instance );
 
-		$reviews = new WPPR_Query_Model();
+		$reviews = new RP_Query_Model();
 		$post    = array();
 		if ( isset( $instance['cwp_tp_category'] ) && trim( $instance['cwp_tp_category'] ) !== '' ) {
 			$array = explode( ':', $instance['cwp_tp_category'] );
@@ -96,7 +96,7 @@ class WPPR_Top_Reviews_Widget extends WPPR_Widget_Abstract {
 		if ( ! empty( $results ) ) {
 			$first  = reset( $results );
 			$first  = isset( $first['ID'] ) ? $first['ID'] : 0;
-			$review = new WPPR_Review_Model( $first );
+			$review = new RP_Review_Model( $first );
 
 			$this->assets( $review );
 		}
@@ -106,7 +106,7 @@ class WPPR_Top_Reviews_Widget extends WPPR_Widget_Abstract {
 		if ( ! empty( $instance['title'] ) ) {
 			echo $args['before_title'] . $instance['title'] . $args['after_title'];
 		}
-		$template = new WPPR_Template();
+		$template = new RP_Template();
 		$template->render(
 			'widget/' . $instance['cwp_tp_layout'],
 			array(
@@ -144,7 +144,7 @@ class WPPR_Top_Reviews_Widget extends WPPR_Widget_Abstract {
 
 		$instance = parent::form( $instance );
 
-		include( WPPR_PATH . '/includes/admin/layouts/widget-admin-tpl.php' );
+		include( RP_PATH . '/includes/admin/layouts/widget-admin-tpl.php' );
 	}
 
 	/**
@@ -166,11 +166,11 @@ class WPPR_Top_Reviews_Widget extends WPPR_Widget_Abstract {
 	public function load_admin_assets() {
 		wp_enqueue_script( 'jquery-ui-slider' );
 		wp_enqueue_script( 'jquery-ui-datepicker' );
-		wp_enqueue_style( WPPR_SLUG . '-jqueryui', WPPR_URL . '/assets/css/jquery-ui.css', array(), WPPR_LITE_VERSION );
+		wp_enqueue_style( RP_SLUG . '-jqueryui', RP_URL . '/assets/css/jquery-ui.css', array(), RP_LITE_VERSION );
 
 		$deps        = array();
 		$deps['js']  = array( 'jquery-ui-slider', 'jquery-ui-datepicker' );
-		$deps['css'] = array( WPPR_SLUG . '-jqueryui' );
+		$deps['css'] = array( RP_SLUG . '-jqueryui' );
 		return $deps;
 	}
 

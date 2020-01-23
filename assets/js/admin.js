@@ -8,8 +8,8 @@ jQuery(document).ready(function ($) {
 		}
 	});
 
-	update_nav($("#wppr_top_tabs .wppr-nav-tab:first"));
-	$("#wppr_top_tabs").on('click', '.wppr-nav-tab', function () {
+	update_nav($("#rp_top_tabs .rp-nav-tab:first"));
+	$("#rp_top_tabs").on('click', '.rp-nav-tab', function () {
 		update_nav($(this));
 		return false;
 	})
@@ -17,9 +17,9 @@ jQuery(document).ready(function ($) {
 	function update_nav(obj) {
 		var tab = obj.attr('data-tab');
 		var id = obj.find('a').attr('href');
-		$('.wppr-nav-tab').removeClass('active');
+		$('.rp-nav-tab').removeClass('active');
 		obj.addClass('active');
-		$('.wppr-tab-content').hide();
+		$('.rp-tab-content').hide();
 		$(id).show();
 	}
 });
@@ -29,7 +29,7 @@ jQuery("document").ready(function () {
 		var $btn = jQuery(this);
 		$btn.parent().find('.spinner').addClass('is-active');
 		$btn.addClass('disabled');
-		var form_data = jQuery('#wppr-settings').serializeArray()
+		var form_data = jQuery('#rp-settings').serializeArray()
 		var data = {
 			'action': 'update_options',
 			'cwppos_options': form_data
@@ -41,12 +41,12 @@ jQuery("document").ready(function () {
 		});
 	});
 
-    jQuery('.wppr_reset_comment_ratings').on('click', function(e) {
+    jQuery('.rp_reset_comment_ratings').on('click', function(e) {
         e.preventDefault();
 		var $btn = jQuery(this);
 		$btn.parent().append('<span class="spinner is-active"></span>');
 		$btn.addClass('disabled');
-		var form_data = jQuery('#wppr-settings').serializeArray()
+		var form_data = jQuery('#rp-settings').serializeArray()
 		var data = {
 			'action': 'reset_comment_ratings',
 			'cwppos_options': form_data

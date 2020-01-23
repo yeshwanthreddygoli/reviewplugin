@@ -1,10 +1,10 @@
-span.wppr-styleimg {
+span.rp-styleimg {
 	display: none;
 	position: relative;
 	width: 100%;
 }
 
-span.wppr-styleimg img {
+span.rp-styleimg img {
 	position: absolute;
 	left: 10px;
 	border: 1px solid  #000;

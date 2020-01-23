@@ -6,7 +6,7 @@
 	height: 40px;
 }
 
-.review-grade-widget .review-wu-grade-content .wppr-c100 {
+.review-grade-widget .review-wu-grade-content .rp-c100 {
 	position: relative;
 	top: 0;
 	left: 0;
@@ -20,17 +20,17 @@
 	transform: none;
 }
 
-.review-grade-widget .review-wu-grade-content .wppr-c100 > span {
+.review-grade-widget .review-wu-grade-content .rp-c100 > span {
 	font-size: 14px;
 	line-height: 40px;
 }
 
-.review-grade-widget .review-wu-grade-content .wppr-c100 .wppr-bar,
-.review-grade-widget .review-wu-grade-content .wppr-c100 .wppr-fill {
+.review-grade-widget .review-wu-grade-content .rp-c100 .rp-bar,
+.review-grade-widget .review-wu-grade-content .rp-c100 .rp-fill {
 	border-width: 4px;
 }
 
-.review-grade-widget .review-wu-grade-content .wppr-c100 .wppr-slice-center {
+.review-grade-widget .review-wu-grade-content .rp-c100 .rp-slice-center {
 	padding: 4px;
 }
 
@@ -66,17 +66,17 @@
 	overflow: hidden;
 }
 
-.cwp-popular-review .wppr-col {
+.cwp-popular-review .rp-col {
 	display: table-cell;
 	width: auto;
 	vertical-align: middle;
 }
 
-.cwp-popular-review .wppr-post-title {
+.cwp-popular-review .rp-post-title {
 	padding: 0 15px;
 }
 
-.cwp-popular-review .wppr-post-title.wppr-no-image {
+.cwp-popular-review .rp-post-title.rp-no-image {
 	padding-left: 0;
 }
 

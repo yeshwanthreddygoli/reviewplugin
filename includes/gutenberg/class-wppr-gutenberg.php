@@ -9,12 +9,12 @@
  * @subpackage wp-product-review/includes/guteneberg
  * @author     Themeisle <friends@themeisle.com>
  */
-class WPPR_Gutenberg {
+class RP_Gutenberg {
 
 	/**
 	 * A reference to an instance of this class.
 	 *
-	 * @var WPPR_Gutenberg The one WPPR_Gutenberg instance.
+	 * @var RP_Gutenberg The one RP_Gutenberg instance.
 	 */
 	private static $instance;
 
@@ -30,7 +30,7 @@ class WPPR_Gutenberg {
 	 */
 	public static function get_instance() {
 		if ( null === self::$instance ) {
-			self::$instance = new WPPR_Gutenberg();
+			self::$instance = new RP_Gutenberg();
 		}
 		return self::$instance;
 	}
@@ -39,7 +39,7 @@ class WPPR_Gutenberg {
 	 * Initializes the plugin by setting filters and administration functions.
 	 */
 	private function __construct() {
-		$plugin        = new WPPR();
+		$plugin        = new RP();
 		$this->version = $plugin->get_version();
 		// Add a filter to load functions when all plugins have been loaded
 		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_gutenberg_scripts' ) );
@@ -47,43 +47,43 @@ class WPPR_Gutenberg {
 		add_action( 'rest_api_init', array( $this, 'update_posts_endpoints' ) );
 		add_filter( 'rest_post_query', array( $this, 'post_meta_request_params' ), 99, 2 );
 		add_filter( 'rest_page_query', array( $this, 'post_meta_request_params' ), 99, 2 );
-		add_filter( 'rest_wppr_review_query', array( $this, 'post_meta_request_params' ), 99, 2 );
+		add_filter( 'rest_rp_review_query', array( $this, 'post_meta_request_params' ), 99, 2 );
 	}
 
 	/**
 	 * Enqueue editor JavaScript and CSS
 	 */
 	public function enqueue_gutenberg_scripts() {
-		if ( WPPR_CACHE_DISABLED ) {
-			$version = filemtime( WPPR_PATH . '/includes/gutenberg/build/sidebar.js' );
+		if ( RP_CACHE_DISABLED ) {
+			$version = filemtime( RP_PATH . '/includes/gutenberg/build/sidebar.js' );
 		} else {
 			$version = $this->version;
 		}
 
-		if ( defined( 'WPPR_PRO_VERSION' ) ) {
+		if ( defined( 'RP_PRO_VERSION' ) ) {
 			$isPro = true;
 		} else {
 			$isPro = false;
 		}
 
-		$model = new WPPR_Query_Model();
-		$length = $model->wppr_get_option( 'cwppos_option_nr' );
+		$model = new RP_Query_Model();
+		$length = $model->rp_get_option( 'cwppos_option_nr' );
 
 		// Enqueue the bundled block JS file
-		wp_enqueue_script( 'wppr-gutenberg-block-js', WPPR_URL . '/includes/gutenberg/build/sidebar.js', array( 'wp-i18n', 'wp-edit-post', 'wp-element', 'wp-editor', 'wp-components', 'wp-compose', 'wp-data', 'wp-plugins', 'wp-edit-post', 'wp-api' ), $version );
+		wp_enqueue_script( 'rp-gutenberg-block-js', RP_URL . '/includes/gutenberg/build/sidebar.js', array( 'wp-i18n', 'wp-edit-post', 'wp-element', 'wp-editor', 'wp-components', 'wp-compose', 'wp-data', 'wp-plugins', 'wp-edit-post', 'wp-api' ), $version );
 
 		wp_localize_script(
-			'wppr-gutenberg-block-js',
-			'wpprguten',
+			'rp-gutenberg-block-js',
+			'rpguten',
 			array(
 				'isPro' => $isPro,
-				'path'  => WPPR_URL,
+				'path'  => RP_URL,
 				'length' => $length,
 			)
 		);
 
 		// Enqueue editor block styles
-		wp_enqueue_style( 'wppr-gutenberg-block-css', WPPR_URL . '/includes/gutenberg/build/sidebar.css', '', $version );
+		wp_enqueue_style( 'rp-gutenberg-block-css', RP_URL . '/includes/gutenberg/build/sidebar.css', '', $version );
 	}
 
 	/**
@@ -110,23 +110,23 @@ class WPPR_Gutenberg {
 	 */
 	public function update_review_callback( $data ) {
 		if ( ! empty( $data['id'] ) ) {
-			$review = new WPPR_Review_Model( $data['id'] );
+			$review = new RP_Review_Model( $data['id'] );
 			if ( $data['cwp_meta_box_check'] === 'Yes' ) {
 				$review->activate();
 
-				if ( $data['postType'] === 'wppr_review' ) {
+				if ( $data['postType'] === 'rp_review' ) {
 					$name = get_the_title( $data['id'] );
 				} else {
 					$name = isset( $data['cwp_rev_product_name'] ) ? sanitize_text_field( $data['cwp_rev_product_name'] ) : '';
 				}
 				$image      = isset( $data['cwp_rev_product_image'] ) ? esc_url( $data['cwp_rev_product_image'] ) : '';
 				$click      = isset( $data['cwp_image_link'] ) ? strval( sanitize_text_field( $data['cwp_image_link'] ) ) : 'image';
-				$template   = isset( $data['_wppr_review_template'] ) ? strval( sanitize_text_field( $data['_wppr_review_template'] ) ) : 'default';
-				$affiliates = isset( $data['wppr_links'] ) ? $data['wppr_links'] : array( '' => '' );
+				$template   = isset( $data['_rp_review_template'] ) ? strval( sanitize_text_field( $data['_rp_review_template'] ) ) : 'default';
+				$affiliates = isset( $data['rp_links'] ) ? $data['rp_links'] : array( '' => '' );
 				$price      = isset( $data['cwp_rev_price'] ) ? sanitize_text_field( $data['cwp_rev_price'] ) : 0;
-				$options    = isset( $data['wppr_options'] ) ? $data['wppr_options'] : array();
-				$pros       = isset( $data['wppr_pros'] ) ? $data['wppr_pros'] : array();
-				$cons       = isset( $data['wppr_cons'] ) ? $data['wppr_cons'] : array();
+				$options    = isset( $data['rp_options'] ) ? $data['rp_options'] : array();
+				$pros       = isset( $data['rp_pros'] ) ? $data['rp_pros'] : array();
+				$cons       = isset( $data['rp_cons'] ) ? $data['rp_cons'] : array();
 
 				foreach ( $affiliates as $key => $option ) {
 					if ( $option === '' ) {
@@ -173,7 +173,7 @@ class WPPR_Gutenberg {
 
 		register_rest_field(
 			$post_types,
-			'wppr_data',
+			'rp_data',
 			array(
 				'get_callback'    => array( $this, 'get_post_meta' ),
 				'schema'          => null,
@@ -191,15 +191,15 @@ class WPPR_Gutenberg {
 		$options = array(
 			'cwp_meta_box_check',
 			'cwp_rev_product_name',
-			'_wppr_review_template',
+			'_rp_review_template',
 			'cwp_rev_product_image',
 			'cwp_image_link',
-			'wppr_links',
+			'rp_links',
 			'cwp_rev_price',
-			'wppr_pros',
-			'wppr_cons',
-			'wppr_rating',
-			'wppr_options',
+			'rp_pros',
+			'rp_cons',
+			'rp_rating',
+			'rp_options',
 		);
 		foreach ( $options as $option ) {
 			if ( get_post_meta( $post_id, $option ) ) {

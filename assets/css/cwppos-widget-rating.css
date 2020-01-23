@@ -1,4 +1,4 @@
-.wppr-prodlist .wppr-rating {
+.rp-prodlist .rp-rating {
 	display: block;
 	width: 80px;
 	height: 16px;
@@ -7,7 +7,7 @@
 	background-size: contain;
 }
 
-.wppr-prodlist .wppr-rating div {
+.rp-prodlist .rp-rating div {
 	display: block;
 	overflow: hidden;
 	max-width: 100%;

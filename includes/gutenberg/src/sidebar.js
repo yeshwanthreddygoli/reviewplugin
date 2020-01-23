@@ -72,23 +72,23 @@ class WP_Product_Review extends Component {
 		this.state = {
 			cwp_meta_box_check: 'No',
 			cwp_rev_product_name: '',
-			_wppr_review_template: 'default',
+			_rp_review_template: 'default',
 			cwp_rev_product_image: '',
 			cwp_image_link: 'image',
-			wppr_links: {
+			rp_links: {
 				'': '',
 			},
 			cwp_rev_price: '',
-			wppr_options: {
+			rp_options: {
 				1: {
 					name: '',
 					value: 0,
 				}
 			},
-			wppr_pros: {
+			rp_pros: {
 				0: '',
 			},
-			wppr_cons: {
+			rp_cons: {
 				0: '',
 			}
 		};
@@ -102,11 +102,11 @@ class WP_Product_Review extends Component {
 
 		const post = await select( 'core' ).getEntityRecord( 'postType', getCurrentPostType(), getCurrentPostId() );
 
-		if ( undefined !== post && post.wppr_data ) {
-			if ( post.wppr_data.wppr_links && post.wppr_data.wppr_links.length < 1 ) {
-				post.wppr_data.wppr_links[''] = '';
+		if ( undefined !== post && post.rp_data ) {
+			if ( post.rp_data.rp_links && post.rp_data.rp_links.length < 1 ) {
+				post.rp_data.rp_links[''] = '';
 			}
-			this.setState( { ...post.wppr_data } );
+			this.setState( { ...post.rp_data } );
 		}
 	}
 
@@ -135,7 +135,7 @@ class WP_Product_Review extends Component {
 	}
 
 	onChangeTemplate( value ) {
-		this.setState( { _wppr_review_template: value } );
+		this.setState( { _rp_review_template: value } );
 		this.props.editPostStatus( { edited: true } );
 	}
 
@@ -159,33 +159,33 @@ class WP_Product_Review extends Component {
 	}
 
 	onChangeReviewAffiliateTitle( e, key ) {
-		let wppr_links = { ...this.state.wppr_links };
-		if ( ( Object.keys( this.state.wppr_links ).length === 2 ) ) {
-			if ( e === Object.keys( wppr_links )[0] || e === Object.keys( wppr_links )[1] ) {
+		let rp_links = { ...this.state.rp_links };
+		if ( ( Object.keys( this.state.rp_links ).length === 2 ) ) {
+			if ( e === Object.keys( rp_links )[0] || e === Object.keys( rp_links )[1] ) {
 				e = e + ' ';
 			}
 		}
-		if ( Object.keys( wppr_links )[0] === key ) {
-			renameKey( wppr_links, key, e );
-			wppr_links = reverseObject( wppr_links );
+		if ( Object.keys( rp_links )[0] === key ) {
+			renameKey( rp_links, key, e );
+			rp_links = reverseObject( rp_links );
 		} else {
-			renameKey( wppr_links, key, e );
+			renameKey( rp_links, key, e );
 		}
-		this.setState( { wppr_links } );
+		this.setState( { rp_links } );
 		this.props.editPostStatus( { edited: true } );
 	}
 
 	onChangeReviewAffiliateLink( e, key ) {
-		const wppr_links = { ...this.state.wppr_links };
-		wppr_links[key] = e;
-		this.setState( { wppr_links } );
+		const rp_links = { ...this.state.rp_links };
+		rp_links[key] = e;
+		this.setState( { rp_links } );
 		this.props.editPostStatus( { edited: true } );
 	}
 
 	addButton() {
-		const wppr_links = { ...this.state.wppr_links };
-		wppr_links['Buy Now'] = '';
-		this.setState( { wppr_links } );
+		const rp_links = { ...this.state.rp_links };
+		rp_links['Buy Now'] = '';
+		this.setState( { rp_links } );
 	};
 
 	onChangeReviewPrice( value ) {
@@ -194,63 +194,63 @@ class WP_Product_Review extends Component {
 	}
 
 	onChangeOptionText( e, key ) {
-		const wppr_options = { ...this.state.wppr_options };
-		wppr_options[key]['name'] = e;
-		this.setState( { wppr_options } );
+		const rp_options = { ...this.state.rp_options };
+		rp_options[key]['name'] = e;
+		this.setState( { rp_options } );
 		this.props.editPostStatus( { edited: true } );
 	}
 
 	onChangeOptionNumber( e, key ) {
-		const wppr_options = { ...this.state.wppr_options };
+		const rp_options = { ...this.state.rp_options };
 		if ( e === '' ) e = 0;
-		wppr_options[key]['value'] = e;
-		this.setState( { wppr_options } );
+		rp_options[key]['value'] = e;
+		this.setState( { rp_options } );
 		this.props.editPostStatus( { edited: true } );
 	}
 
 	addOption() {
-		const key = Object.keys( this.state.wppr_options ).length + 1;
-		const wppr_options = { ...this.state.wppr_options };
-		wppr_options[key] = {
+		const key = Object.keys( this.state.rp_options ).length + 1;
+		const rp_options = { ...this.state.rp_options };
+		rp_options[key] = {
 			name: '',
 			value: 0,
 		};
-		this.setState( { wppr_options } );
+		this.setState( { rp_options } );
 	};
 
 	onChangeProText( e, key ) {
-		const wppr_pros = { ...this.state.wppr_pros };
-		wppr_pros[key] = e;
-		this.setState( { wppr_pros } );
+		const rp_pros = { ...this.state.rp_pros };
+		rp_pros[key] = e;
+		this.setState( { rp_pros } );
 		this.props.editPostStatus( { edited: true } );
 	}
 
 	addPro() {
-		const key = Object.keys( this.state.wppr_pros ).length;
-		const wppr_pros = { ...this.state.wppr_pros };
-		wppr_pros[key] = '';
-		this.setState( { wppr_pros } );
+		const key = Object.keys( this.state.rp_pros ).length;
+		const rp_pros = { ...this.state.rp_pros };
+		rp_pros[key] = '';
+		this.setState( { rp_pros } );
 	};
 
 	onChangeConText( e, key ) {
-		const wppr_cons = { ...this.state.wppr_cons };
-		wppr_cons[key] = e;
-		this.setState( { wppr_cons } );
+		const rp_cons = { ...this.state.rp_cons };
+		rp_cons[key] = e;
+		this.setState( { rp_cons } );
 		this.props.editPostStatus( { edited: true } );
 	}
 
 	addCon() {
-		const key = Object.keys( this.state.wppr_cons ).length;
-		const wppr_cons = { ...this.state.wppr_cons };
-		wppr_cons[key] = '';
-		this.setState( { wppr_cons } );
+		const key = Object.keys( this.state.rp_cons ).length;
+		const rp_cons = { ...this.state.rp_cons };
+		rp_cons[key] = '';
+		this.setState( { rp_cons } );
 	};
 
 	importReview( key ) {
 		this.setState( {
-			wppr_options: this.props.posts[key].wppr_data.wppr_options,
-			wppr_pros: this.props.posts[key].wppr_data.wppr_pros,
-			wppr_cons: this.props.posts[key].wppr_data.wppr_cons
+			rp_options: this.props.posts[key].rp_data.rp_options,
+			rp_pros: this.props.posts[key].rp_data.rp_pros,
+			rp_cons: this.props.posts[key].rp_data.rp_cons
 		} );
 		this.props.editPostStatus( { edited: true } );
 		this.props.setState( { isOpen: false } );
@@ -282,31 +282,31 @@ class WP_Product_Review extends Component {
 							className="wp-product-review-product-details"
 							initialOpen={ true }
 							>
-							{ ( wpprguten.isPro ) && (
+							{ ( rpguten.isPro ) && (
 								<RadioImageControl
 									label={ __( 'Review Template' ) }
-									selected={ this.state._wppr_review_template }
+									selected={ this.state._rp_review_template }
 									options={ [
 										{
 											label: __( 'Default' ),
-											src: wpprguten.path + '/assets/img/templates/default.png',
+											src: rpguten.path + '/assets/img/templates/default.png',
 											value: 'default',
 										},
 										{
 											label: __( 'Style 1' ),
-											src: wpprguten.path + '/assets/img/templates/style1.png',
+											src: rpguten.path + '/assets/img/templates/style1.png',
 											value: 'style1',
 										},
 										{
 											label: __( 'Style 2' ),
-											src: wpprguten.path + '/assets/img/templates/style2.png',
+											src: rpguten.path + '/assets/img/templates/style2.png',
 											value: 'style2',
 										},
 									] }
 									onChange={ this.onChangeTemplate }
 								/>
 							) }
-							{ ( this.props.postType !== 'wppr_review' ) && [
+							{ ( this.props.postType !== 'rp_review' ) && [
 								<TextControl
 									label={ __( 'Product Name' ) }
 									type="text"
@@ -340,7 +340,7 @@ class WP_Product_Review extends Component {
 											isLarge
 											onClick={ open }
 											style={ { marginTop: '10px' } }
-											className={ ( this.state.cwp_rev_product_image === '' ) && 'wppr_image_upload' }
+											className={ ( this.state.cwp_rev_product_image === '' ) && 'rp_image_upload' }
 										>
 											{ __( 'Choose or Upload an Image' ) }
 										</Button>
@@ -362,8 +362,8 @@ class WP_Product_Review extends Component {
 								] }
 								onChange={ this.onChangeImageLink }
 							/>
-							<div className="wppr-review-links-list">
-							{ Object.keys( this.state.wppr_links ).map( ( key ) => (
+							<div className="rp-review-links-list">
+							{ Object.keys( this.state.rp_links ).map( ( key ) => (
 								<Fragment>
 									<TextControl
 										label={ __( 'Affiliate Button Text' ) }
@@ -375,12 +375,12 @@ class WP_Product_Review extends Component {
 									<TextControl
 										label={ __( 'Affiliate Button Link' ) }
 										type="url"
-										value={ this.state.wppr_links[key] }
+										value={ this.state.rp_links[key] }
 										onChange={ ( e ) => this.onChangeReviewAffiliateLink( e, key ) }
 									/>
 								</Fragment>
 							) ) }
-							{ ( Object.keys( this.state.wppr_links ).length < 2 ) && (
+							{ ( Object.keys( this.state.rp_links ).length < 2 ) && (
 								<Button
 									isLarge
 									onClick={ this.addButton }
@@ -401,30 +401,30 @@ class WP_Product_Review extends Component {
 							className="wp-product-review-product-options"
 							initialOpen={ false }
 						>
-							<div className="wppr-review-options-list">
-							{ Object.keys( this.state.wppr_options ).map( ( key ) => (
-								<div className="wppr-review-options-item">
-									<label for={`wppr-option-item-${key}`}>{ key }</label>
+							<div className="rp-review-options-list">
+							{ Object.keys( this.state.rp_options ).map( ( key ) => (
+								<div className="rp-review-options-item">
+									<label for={`rp-option-item-${key}`}>{ key }</label>
 									<TextControl
 										type="text"
-										id={`wppr-option-item-${key}`}
-										className="wppr-text"
+										id={`rp-option-item-${key}`}
+										className="rp-text"
 										placeholder={ __( 'Option' ) }
-										value={ this.state.wppr_options[key].name }
+										value={ this.state.rp_options[key].name }
 										onChange={ ( e ) => this.onChangeOptionText( e, key ) }
 									/>
 									<TextControl
 										type="number"
-										className="wppr-text wppr-option-number"
+										className="rp-text rp-option-number"
 										placeholder={ __( '0' ) }
 										min={ 0 }
 										max={ 100 }
-										value={ this.state.wppr_options[key].value }
+										value={ this.state.rp_options[key].value }
 										onChange={ ( e ) => this.onChangeOptionNumber( e, key ) }
 									/>
 								</div>
 								) ) }
-								{ ( Object.keys( this.state.wppr_options ).length < wpprguten.length ) && (
+								{ ( Object.keys( this.state.rp_options ).length < rpguten.length ) && (
 									<Button
 										isLarge
 										onClick={ this.addOption }
@@ -439,21 +439,21 @@ class WP_Product_Review extends Component {
 							className="wp-product-review-product-pros"
 							initialOpen={ false }
 						>
-							<div className="wppr-review-pro-list">
-							{ Object.keys( this.state.wppr_pros ).map( ( key ) => (
-								<div className="wppr-review-pro-item">
-									<label for={`wppr-pro-item-${key}`}>{ parseInt( key ) + 1 }</label>
+							<div className="rp-review-pro-list">
+							{ Object.keys( this.state.rp_pros ).map( ( key ) => (
+								<div className="rp-review-pro-item">
+									<label for={`rp-pro-item-${key}`}>{ parseInt( key ) + 1 }</label>
 									<TextControl
 										type="text"
-										id={`wppr-pro-item-${key}`}
-										className="wppr-text"
+										id={`rp-pro-item-${key}`}
+										className="rp-text"
 										placeholder={ __( 'Option' ) }
-										value={ this.state.wppr_pros[key] }
+										value={ this.state.rp_pros[key] }
 										onChange={ ( e ) => this.onChangeProText( e, key ) }
 									/>
 								</div>
 								) ) }
-								{ ( Object.keys( this.state.wppr_pros ).length < wpprguten.length ) && (
+								{ ( Object.keys( this.state.rp_pros ).length < rpguten.length ) && (
 									<Button
 										isLarge
 										onClick={ this.addPro }
@@ -468,21 +468,21 @@ class WP_Product_Review extends Component {
 							className="wp-product-review-product-cons"
 							initialOpen={ false }
 						>
-							<div className="wppr-review-con-list">
-								{ Object.keys( this.state.wppr_cons ).map( ( key ) => (
-									<div className="wppr-review-con-item">
-										<label for={`wppr-con-item-${key}`}>{ parseInt( key ) + 1 }</label>
+							<div className="rp-review-con-list">
+								{ Object.keys( this.state.rp_cons ).map( ( key ) => (
+									<div className="rp-review-con-item">
+										<label for={`rp-con-item-${key}`}>{ parseInt( key ) + 1 }</label>
 										<TextControl
 											type="text"
-											id={`wppr-con-item-${key}`}
-											className="wppr-text"
+											id={`rp-con-item-${key}`}
+											className="rp-text"
 											placeholder={ __( 'Option' ) }
-											value={ this.state.wppr_cons[key] }
+											value={ this.state.rp_cons[key] }
 											onChange={ ( e ) => this.onChangeConText( e, key ) }
 										/>
 									</div>
 								) ) }
-								{ ( Object.keys( this.state.wppr_cons ).length < wpprguten.length ) && (
+								{ ( Object.keys( this.state.rp_cons ).length < rpguten.length ) && (
 									<Button
 										isLarge
 										onClick={ this.addCon }
@@ -492,8 +492,8 @@ class WP_Product_Review extends Component {
 								) }
 							</div>
 						</PanelBody>
-						{ ( wpprguten.isPro ) && (
-							<div className="wppr-review-import-review-button">
+						{ ( rpguten.isPro ) && (
+							<div className="rp-review-import-review-button">
 								<Button
 									isLarge
 									isPrimary
@@ -504,7 +504,7 @@ class WP_Product_Review extends Component {
 								{ this.props.isOpen ?
 									<Modal
 										title={ __( 'Import Review' ) }
-										className="wppr-review-import-modal"
+										className="rp-review-import-modal"
 										onRequestClose={ () => this.props.setState( { isOpen: false } ) }>
 										{ ( this.props.posts ) && 
 											 Object.keys( this.props.posts ).map( ( key ) => (
@@ -515,22 +515,22 @@ class WP_Product_Review extends Component {
 													<div className="cwp_pitem_info">
 														<ul class="cwp_pitem_options_content">
 															<h4>{ __( 'Options' ) }</h4>
-															{ Object.keys( this.props.posts[key].wppr_data.wppr_options ).map( ( i ) => (
-																<li>{ this.props.posts[key].wppr_data.wppr_options[i].name }</li>
+															{ Object.keys( this.props.posts[key].rp_data.rp_options ).map( ( i ) => (
+																<li>{ this.props.posts[key].rp_data.rp_options[i].name }</li>
 															) ) }
 														</ul>
 
 														<ul class="cwp_pitem_options_pros">
 															<h4>{ __( 'Pros' ) }</h4>
-															{ Object.keys( this.props.posts[key].wppr_data.wppr_pros ).map( ( i ) => (
-																<li>{ this.props.posts[key].wppr_data.wppr_pros[i] }</li>
+															{ Object.keys( this.props.posts[key].rp_data.rp_pros ).map( ( i ) => (
+																<li>{ this.props.posts[key].rp_data.rp_pros[i] }</li>
 															) ) }
 														</ul>
 
 														<ul class="cwp_pitem_options_cons">
 															<h4>{ __( 'Cons' ) }</h4>
-															{ Object.keys( this.props.posts[key].wppr_data.wppr_cons ).map( ( i ) => (
-																<li>{ this.props.posts[key].wppr_data.wppr_cons[i] }</li>
+															{ Object.keys( this.props.posts[key].rp_data.rp_cons ).map( ( i ) => (
+																<li>{ this.props.posts[key].rp_data.rp_cons[i] }</li>
 															) ) }
 														</ul>
 														<Button
@@ -554,7 +554,7 @@ class WP_Product_Review extends Component {
 	}
 }
 
-const WPPR = compose( [
+const RP = compose( [
 	withSelect( ( select, { forceIsSaving } ) => {
 		const {
 			getCurrentPostId,
@@ -590,5 +590,5 @@ const WPPR = compose( [
 
 registerPlugin( 'wp-product-review', {
 	icon: 'star-empty',
-	render: WPPR,
+	render: RP,
 } );

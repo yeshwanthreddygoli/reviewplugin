@@ -2,7 +2,7 @@
 /**
  *  WP Prodact Review front page layout.
  *
- * @package     WPPR
+ * @package     RP
  * @subpackage  Layouts
  * @copyright   Copyright (c) 2017, Bogdan Preda
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
