@@ -1,26 +1,9 @@
 <?php
-/**
- * The RP Widget Abstract Class.
- *
- * @package RP
- * @subpackage Widget
- * @copyright   Copyright (c) 2017, Bogdan Preda
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since 3.0.0
- */
 
-/**
- * Class RP_Widget_Abstract
- */
 abstract class RP_Widget_Abstract extends WP_Widget {
 	const RESTRICT_TITLE_CHARS = 100;
 
-	/**
-	 * Method to load assets required for front end display.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 */
+	
 	public function assets( $review_object ) {
 
 		$dependencies = $this->load_assets();
@@ -30,30 +13,15 @@ abstract class RP_Widget_Abstract extends WP_Widget {
 		wp_enqueue_style( RP_SLUG . '-widget-rating', RP_URL . '/assets/css/cwppos-widget-rating.css', array( RP_SLUG . '-pac-widget-stylesheet' ), RP_LITE_VERSION );
 
 		$plugin = new RP();
-		$public = new Wppr_Public( $plugin->get_plugin_name(), $plugin->get_version() );
+		$public = new Rp_Public( $plugin->get_plugin_name(), $plugin->get_version() );
 
 		$public->load_review_assets( $review_object );
 	}
 
-	/**
-	 * Load public assets specific to this widget.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 */
+	
 	public abstract function load_assets();
 
-	/**
-	 * Method for displaying the widget on the front end.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 *
-	 * @param   array $args Arguments for this method.
-	 * @param   array $instance Instance array for the widget.
-	 *
-	 * @return array
-	 */
+	
 	public function widget( $args, $instance ) {
 		$instance['title']    = apply_filters( 'widget_title', $instance['title'] );
 		$instance['no_items'] = apply_filters( 'widget_content', $instance['no_items'] );
@@ -78,7 +46,7 @@ abstract class RP_Widget_Abstract extends WP_Widget {
 		} else {
 			$instance['show_image'] = false;
 		}
-		// @codingStandardsIgnoreStart
+		
 		if ( $instance['cwp_tp_category'] == 'All' ) {
 			$instance['cwp_tp_category'] = '';
 		}
@@ -95,38 +63,19 @@ abstract class RP_Widget_Abstract extends WP_Widget {
 			$instance['cwp_tp_rating_type'] = 'round';
 		}
 
-		// @codingStandardsIgnoreEnd
+		
 
 		add_filter( 'rp_review_image_size', array( $this, 'image_size' ), 10, 3 );
 
 		return $instance;
 	}
 
-	/**
-	 * Change size to rp-widget.
-	 *
-	 * @access  public
-	 *
-	 * @param   string            $size The size of the image.
-	 * @param   int               $id The id of the review.
-	 * @param   RP_Review_Model $model The review model.
-	 *
-	 * @return string
-	 */
+	
 	public function image_size( $size, $id, $model ) {
 		return 'rp-widget';
 	}
 
-	/**
-	 * The admin widget form method.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 *
-	 * @param   array $instance The instance array for this widget.
-	 *
-	 * @return array
-	 */
+	
 	public function form( $instance ) {
 
 		if ( ! isset( $instance['no_items'] ) ) {
@@ -164,7 +113,7 @@ abstract class RP_Widget_Abstract extends WP_Widget {
 		}
 
 		if ( ! isset( $instance['cwp_tp_post_types'] ) || empty( $instance['cwp_tp_post_types'] ) ) {
-			// backward compatibility with previous versions where you could not select post types
+			
 			$types  = array( 'post', 'page' );
 			if ( 'rp_top_reviews_widget' === $this->id_base ) {
 				$types = array( 'post' );
@@ -191,17 +140,7 @@ abstract class RP_Widget_Abstract extends WP_Widget {
 		return $instance;
 	}
 
-	/**
-	 * Method to update widget data.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 *
-	 * @param   array $new_instance The new instance array for the widget.
-	 * @param   array $old_instance The old instance array of the widget.
-	 *
-	 * @return array
-	 */
+	
 	public function update( $new_instance, $old_instance ) {
 
 		$instance = $old_instance;
@@ -224,12 +163,7 @@ abstract class RP_Widget_Abstract extends WP_Widget {
 		return $instance;
 	}
 
-	/**
-	 * Method for loading admin widget assets.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 */
+	
 	public function adminAssets() {
 		if ( is_admin() ) {
 
@@ -256,11 +190,6 @@ abstract class RP_Widget_Abstract extends WP_Widget {
 		}
 	}
 
-	/**
-	 * Load admin assets specific to this widget.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 */
+	
 	public abstract function load_admin_assets();
 }

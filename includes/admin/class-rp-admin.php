@@ -1,52 +1,14 @@
 <?php
-/**
- * The admin-specific functionality of the plugin.
- *
- * @link       https://themeisle.com/
- * @since      3.0.0
- *
- * @package    RP
- * @subpackage RP/admin
- */
 
-/**
- * The admin-specific functionality of the plugin.
- *
- * Defines the plugin name, version, and two examples hooks for how to
- * enqueue the admin-specific stylesheet and JavaScript.
- *
- * @package    RP
- * @subpackage RP/admin
- * @author     ThemeIsle <friends@themeisle.com>
- */
 class RP_Admin {
 
-	/**
-	 * The ID of this plugin.
-	 *
-	 * @since    3.0.0
-	 * @access   private
-	 * @var      string $plugin_name The ID of this plugin.
-	 */
+	
 	private $plugin_name;
 
-	/**
-	 * The version of this plugin.
-	 *
-	 * @since    3.0.0
-	 * @access   private
-	 * @var      string $version The current version of this plugin.
-	 */
+	
 	private $version;
 
-	/**
-	 * Initialize the class and set its properties.
-	 *
-	 * @since    3.0.0
-	 *
-	 * @param      string $plugin_name The name of this plugin.
-	 * @param      string $version The version of this plugin.
-	 */
+	
 	public function __construct( $plugin_name, $version ) {
 
 		$this->plugin_name = $plugin_name;
@@ -54,39 +16,21 @@ class RP_Admin {
 
 	}
 
-	/**
-	 * Register the stylesheets for the admin area.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 *
-	 * @param   string $hook The hook used filter loaded styles.
-	 */
+	
 	public function enqueue_styles( $hook ) {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in RP_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The RP_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
+		
 		switch ( $hook ) {
 			case 'toplevel_page_rp':
 				wp_enqueue_style( 'wp-color-picker' );
 				wp_enqueue_style( $this->plugin_name . '-dashboard-css', RP_URL . '/assets/css/dashboard_styles.css', array(), $this->version );
 				wp_enqueue_style( $this->plugin_name . '-admin-css', RP_URL . '/assets/css/admin.css', array(), $this->version );
-				// fall-through
+				
 			case 'product-review_page_rp-support':
 				wp_enqueue_style( $this->plugin_name . '-upsell-css', RP_URL . '/assets/css/support.css', array(), $this->version );
 				break;
 			case 'post.php':
-				// fall through.
+				
 			case 'post-new.php':
 				$wp_scripts = wp_scripts();
 				wp_enqueue_style( $this->plugin_name . '-jquery-ui', sprintf( '//ajax.googleapis.com/ajax/libs/jqueryui/%s/themes/smoothness/jquery-ui.css', $wp_scripts->registered['jquery-ui-core']->ver ), array(), $this->version );
@@ -94,34 +38,17 @@ class RP_Admin {
 		}
 	}
 
-	/**
-	 * Register the JavaScript for the admin area.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 *
-	 * @param   string $hook The hook used filter loaded scripts.
-	 */
+	
 	public function enqueue_scripts( $hook ) {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in RP_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The RP_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
+		
 
 		switch ( $hook ) {
 			case 'toplevel_page_rp':
 				wp_enqueue_script( $this->plugin_name . '-admin-js', RP_URL . '/assets/js/admin.js', array( 'jquery', 'wp-color-picker' ), $this->version );
 				break;
 			case 'post.php':
-				// fall through.
+				
 			case 'post-new.php':
 				wp_enqueue_script( $this->plugin_name . '-post', RP_URL . '/assets/js/post.js', array( 'jquery-ui-accordion' ), $this->version );
 				break;
@@ -130,12 +57,7 @@ class RP_Admin {
 		$this->load_review_cpt();
 	}
 
-	/**
-	 * Add admin menu items.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 */
+	
 	public function menu_pages() {
 		add_menu_page(
 			__( 'WP Product Review', 'wp-product-review' ),
@@ -163,35 +85,20 @@ class RP_Admin {
 		);
 	}
 
-	/**
-	 * Method to render settings page.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 */
+	
 	public function page_settings() {
 		$model  = new RP_Options_Model();
 		$render = new RP_Admin_Render_Controller( $this->plugin_name, $this->version );
 		$render->retrive_template( 'settings', $model );
 	}
 
-	/**
-	 * Method to render support page.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 */
+
 	public function render_support() {
 		$render = new RP_Admin_Render_Controller( $this->plugin_name, $this->version );
 		$render->retrive_template( 'support' );
 	}
 
-	/**
-	 * Method called from AJAX request to reset comment ratings.
-	 *
-	 * @since   ?
-	 * @access  public
-	 */
+	
 	public function reset_comment_ratings() {
 		$data  = $_POST['cwppos_options'];
 
@@ -223,12 +130,7 @@ class RP_Admin {
 		die();
 	}
 
-	/**
-	 * Method called from AJAX request to update options.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 */
+	
 	public function update_options() {
 		$model = new RP_Options_Model();
 		$data  = $_POST['cwppos_options'];
@@ -248,7 +150,7 @@ class RP_Admin {
 			$model->rp_set_option( $option['name'], $option['value'] );
 		}
 
-		// delete the transients for AMP.
+		
 		$templates = apply_filters( 'rp_review_templates', array( 'default', 'style1', 'style2' ) );
 		foreach ( $templates as $template ) {
 			delete_transient( '_rp_amp_css_' . str_replace( '.', '_', $this->version ) . '_' . $template );
@@ -256,12 +158,7 @@ class RP_Admin {
 		die();
 	}
 
-	/**
-	 * Method called from AJAX request to populate taxonoy and terms of the specified post type.
-	 *
-	 * @since   ?
-	 * @access  public
-	 */
+	
 	public function get_taxonomies() {
 		check_ajax_referer( RP_SLUG, 'nonce' );
 
@@ -271,12 +168,7 @@ class RP_Admin {
 		wp_die();
 	}
 
-	/**
-	 * Method called from AJAX request to populate categories of specified post types.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 */
+	
 	public function get_categories() {
 		check_ajax_referer( RP_SLUG, 'nonce' );
 
@@ -286,12 +178,7 @@ class RP_Admin {
 		wp_die();
 	}
 
-	/**
-	 * Method that returns the taxonomy and terms of specified post type.
-	 *
-	 * @since   ?
-	 * @access  public
-	 */
+	
 	public static function get_taxonomy_and_terms_for_post_type( $post_type ) {
 		$tax_terms = array();
 		if ( $post_type ) {
@@ -317,7 +204,7 @@ class RP_Admin {
 					}
 					$categories = array();
 					foreach ( $terms as $term ) {
-						// we will prefix the slug with the name of the taxonomy so that we can use it in the query.
+						
 						$categories[ $term->taxonomy . ':' . $term->slug ] = $term->name;
 					}
 					$tax_terms[ $tax->label ] = $categories;
@@ -328,12 +215,7 @@ class RP_Admin {
 		return $tax_terms;
 	}
 
-	/**
-	 * Method that returns the categories of specified post types.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 */
+	
 	public static function get_category_for_post_type( $post_type ) {
 		$categories = array();
 		if ( $post_type ) {
@@ -364,18 +246,13 @@ class RP_Admin {
 		return $categories;
 	}
 
-	/**
-	 * Adds the additional fields (columns, filters etc.) to the post listing screen.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 */
+	
 	public function get_additional_fields() {
-		// add filter to post listing.
+		
 		add_action( 'restrict_manage_posts', array( $this, 'restrict_manage_posts' ), 10, 2 );
 		add_filter( 'parse_query', array( $this, 'show_only_review_posts' ), 10 );
 
-		// add columns to post listing.
+		
 		$post_types     = apply_filters( 'rp_post_types_custom_columns', array() );
 		if ( $post_types ) {
 			foreach ( $post_types as $post_type ) {
@@ -389,11 +266,7 @@ class RP_Admin {
 		$this->get_additional_fields_for_cpt();
 	}
 
-	/**
-	 * Show the filter.
-	 *
-	 * @access  public
-	 */
+
 	public function restrict_manage_posts( $post_type, $which ) {
 		$post_types     = apply_filters( 'rp_post_types_custom_filter', array( 'post', 'page' ) );
 		if ( ! $post_types || ! in_array( $post_type, $post_types, true ) ) {
@@ -407,11 +280,7 @@ class RP_Admin {
 		echo '</select>';
 	}
 
-	/**
-	 * Filter only reviews.
-	 *
-	 * @access  public
-	 */
+	
 	public function show_only_review_posts( $query ) {
 		if ( ! ( is_admin() && $query->is_main_query() ) ) {
 			return $query;
@@ -438,30 +307,18 @@ class RP_Admin {
 		return $query;
 	}
 
-	/**
-	 * Define the additional columns.
-	 *
-	 * @access  public
-	 */
+	
 	public function manage_posts_columns( $columns ) {
 		$columns['rp_review']    = __( 'Review Rating', 'wp-product-review' );
 		return $columns;
 	}
 
-	/**
-	 * Defines the sortable columns.
-	 *
-	 * @access  public
-	 */
+	
 	public function sort_posts_custom_column( $columns ) {
 		$columns['rp_review'] = 'rp_review';
 		return $columns;
 	}
-	/**
-	 * Manage the additional column.s
-	 *
-	 * @access  public
-	 */
+	
 	public function manage_posts_custom_column( $column, $id ) {
 		switch ( $column ) {
 			case 'rp_review':
@@ -471,9 +328,7 @@ class RP_Admin {
 		}
 	}
 
-	/**
-	 * Loads the assets for the CPT.
-	 */
+	
 	public function load_review_cpt() {
 		$current_screen = get_current_screen();
 
@@ -504,9 +359,7 @@ class RP_Admin {
 		);
 	}
 
-	/**
-	 * Loads the additional fields for the CPT.
-	 */
+	
 	private function get_additional_fields_for_cpt() {
 		$model = new RP_Query_Model();
 		if ( 'yes' !== $model->rp_get_option( 'rp_cpt' ) ) {
@@ -519,26 +372,18 @@ class RP_Admin {
 		add_action( 'pre_get_posts', array( $this, 'sort_cpt_custom_column_order') );
 	}
 
-	/**
-	 * Define the additional columns for the CPT.
-	 *
-	 * @access  public
-	 */
+	
 	public function manage_cpt_columns( $columns ) {
 		$custom     = array(
 			'rp_price' => __( 'Product Price', 'wp-product-review' ),
 			'rp_rating' => __( 'Rating', 'wp-product-review' ),
 		);
 
-		// add before the date column.
+		
 		return array_slice( $columns, 0, -1, true ) + $custom + array_slice( $columns, -1, null, true );
 	}
 
-	/**
-	 * Manage the additional columns for the CPT.
-	 *
-	 * @access  public
-	 */
+	
 	public function manage_cpt_custom_column( $column, $id ) {
 		switch ( $column ) {
 			case 'rp_price':
@@ -547,7 +392,7 @@ class RP_Admin {
 				break;
 			case 'rp_rating':
 				$model = new RP_Review_Model( $id );
-				// save the rating as a temporary post meta which can be used in pre_get_posts
+				
 				add_filter(
 					'rp_rating', function( $rating, $id ) {
 					update_post_meta( $id, '_rp_rating_num_temp', $rating );
@@ -559,21 +404,13 @@ class RP_Admin {
 		}
 	}
 
-	/**
-	 * Defines the sortable columns.
-	 *
-	 * @access  public
-	 */
+	
 	public function sort_cpt_custom_column( $columns ) {
 		$columns['rp_rating'] = 'rp_rating_num';
 		return $columns;
 	}
 
-	/**
-	 * Defines the logic to use for sortable columns.
-	 *
-	 * @access  public
-	 */
+	
 	public function sort_cpt_custom_column_order( $query ) {
 		if ( ! is_admin() ) {
 			return;
@@ -590,29 +427,19 @@ class RP_Admin {
 	}
 
 
-	/**
-	 * Add an upsell bar when the tab starts.
-	 *
-	 * @param string $section Name of the section.
-	 */
+	
 	public function settings_section_upsell( $section ) {
 		if ( 'general' === $section ) {
 			echo '<label class="rp-upsell-label"> You can display the review using the <b>[P_REVIEW]</b> shortcode. You can read more about it <a href="https://docs.themeisle.com/article/449-wp-product-review-shortcode-documentation" target="_blank">here</a></label>';
 		}
 	}
 
-	/**
-	 * Add a custom image size for widgets.
-	 */
+	
 	public function add_image_size() {
 		add_image_size( 'rp-widget', 50, 50 );
 	}
 
-	/**
-	 * On activation of the plugin
-	 *
-	 * @access  public
-	 */
+	
 	public function on_activation( $plugin ) {
 		if ( defined( 'TI_UNIT_TESTING' ) ) {
 			return;

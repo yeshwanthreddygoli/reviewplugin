@@ -1,25 +1,8 @@
 <?php
-/**
- * The RP Top Reviews Widget Class.
- *
- * @package RP
- * @subpackage Widget
- * @copyright   Copyright (c) 2017, Bogdan Preda
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since 3.1.1
- */
 
-/**
- * Class RP_Top_Reviews_Widget
- */
 class RP_Top_Reviews_Widget extends RP_Widget_Abstract {
 
-	/**
-	 * RP_Top_Reviews_Widget constructor.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 */
+	
 	public function __construct() {
 		parent::__construct(
 			'rp_top_reviews_widget',
@@ -30,41 +13,17 @@ class RP_Top_Reviews_Widget extends RP_Widget_Abstract {
 		);
 	}
 
-	/**
-	 * Method to register the widget.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 */
+	
 	public function register() {
 		register_widget( 'RP_Top_Reviews_Widget' );
 	}
 
-	/**
-	 * Method to filter posts order.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 *
-	 * @param   string $orderby The condition string for ordering.
-	 *
-	 * @return string
-	 */
+	
 	public function custom_order_by( $orderby ) {
 		return 'mt1.meta_value DESC, mt2.meta_value+0 DESC';
 	}
 
-	/**
-	 * Method for displaying the widget on the front end.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 *
-	 * @param   array $args Arguments for this method.
-	 * @param   array $instance Instance array for the widget.
-	 *
-	 * @return mixed
-	 */
+	
 	public function widget( $args, $instance ) {
 
 		$instance = parent::widget( $args, $instance );
@@ -100,7 +59,7 @@ class RP_Top_Reviews_Widget extends RP_Widget_Abstract {
 
 			$this->assets( $review );
 		}
-		// before and after widget arguments are defined by themes
+		
 		echo $args['before_widget'];
 
 		if ( ! empty( $instance['title'] ) ) {
@@ -118,16 +77,7 @@ class RP_Top_Reviews_Widget extends RP_Widget_Abstract {
 		echo $args['after_widget'];
 	}
 
-	/**
-	 * The admin widget form method.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 *
-	 * @param   array $instance The instance array for this widget.
-	 *
-	 * @return mixed
-	 */
+
 	public function form( $instance ) {
 		$this->adminAssets();
 		if ( ! isset( $instance['title'] ) ) {
@@ -147,22 +97,12 @@ class RP_Top_Reviews_Widget extends RP_Widget_Abstract {
 		include( RP_PATH . '/includes/admin/layouts/widget-admin-tpl.php' );
 	}
 
-	/**
-	 * Load public assets specific to this widget.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 */
+	
 	public function load_assets() {
-		// empty.
+		
 	}
 
-	/**
-	 * Load admin assets specific to this widget.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 */
+	
 	public function load_admin_assets() {
 		wp_enqueue_script( 'jquery-ui-slider' );
 		wp_enqueue_script( 'jquery-ui-datepicker' );
@@ -174,17 +114,7 @@ class RP_Top_Reviews_Widget extends RP_Widget_Abstract {
 		return $deps;
 	}
 
-	/**
-	 * Method to update widget data.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 *
-	 * @param   array $new_instance The new instance array for the widget.
-	 * @param   array $old_instance The old instance array of the widget.
-	 *
-	 * @return array
-	 */
+	
 	public function update( $new_instance, $old_instance ) {
 		$instance = parent::update( $new_instance, $old_instance );
 

@@ -1,58 +1,21 @@
 <?php
-/**
- * The main loader file for rp.
- *
- * @package RP
- * @subpackage Settings
- * @copyright   Copyright (c) 2017, Marius Cristea
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since 3.0.0
- */
 
-// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/**
- * Class RP_Global_Settings for handling global options.
- */
+
 class RP_Global_Settings {
-	/**
-	 * The main instance var.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 * @var RP_Global_Settings The one RP_Global_Settings istance.
-	 */
+	
 	public static $instance;
 
-	/**
-	 * Stores the default fields data.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 * @var array|mixed|void $fields Options fields.
-	 */
+
 	public $fields = array();
 
-	/**
-	 * Stores the sections for the settings page.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 * @var array|mixed|void $sections Sections of the admin page.
-	 */
+	
 	public $sections = array();
 
-	/**
-	 * The instance method for the static class.
-	 * Defines and returns the instance of the static class.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 * @return RP_Global_Settings
-	 */
+	
 	public static function instance() {
 		if ( ! isset( self::$instance ) && ! ( self::$instance instanceof RP_Global_Settings ) ) {
 			self::$instance           = new RP_Global_Settings;
@@ -376,14 +339,12 @@ class RP_Global_Settings {
 				)
 			);
 
-		}// End if().
+		}
 
 		return self::$instance;
 	}
 
-	/**
-	 * When Disqus or Jetpack Comments are enabled, the user review doesn't work.
-	 */
+	
 	private static function enable_user_comments() {
 		if ( ! is_admin() ) {
 			return true;
@@ -395,9 +356,7 @@ class RP_Global_Settings {
 		return true;
 	}
 
-	/**
-	 * When Disqus or Jetpack Comments are enabled, show this to the user.
-	 */
+
 	private static function disable_user_comments_msg() {
 		if ( ! is_admin() ) {
 			return true;
@@ -416,35 +375,17 @@ class RP_Global_Settings {
 		return '';
 	}
 
-	/**
-	 * Return the section array.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 * @return array
-	 */
+
 	public function get_sections() {
 		return self::$instance->sections;
 	}
 
-	/**
-	 * Return the fields array.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 * @return array
-	 */
+	
 	public function get_fields() {
 		return self::$instance->fields;
 	}
 
-	/**
-	 * Return a filterd array based on sections value.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 * @return array
-	 */
+	
 	public function get_filtered_fields() {
 		$fields = array();
 		foreach ( self::$instance->sections as $key => $value ) {
