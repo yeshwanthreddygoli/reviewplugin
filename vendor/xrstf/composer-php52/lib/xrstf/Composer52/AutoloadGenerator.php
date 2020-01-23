@@ -1,20 +1,4 @@
 <?php
-/*
- * Copyright (c) 2013, Christoph Mewes, http://www.xrstf.de
- *
- * This file is released under the terms of the MIT license. You can find the
- * complete text in the attached LICENSE file or online at:
- *
- * http://www.opensource.org/licenses/mit-license.php
- *
- * --------------------------------------------------------------------------
- *
- * 99% of this is copied as-is from the original Composer source code and is
- * released under MIT license as well. Copyright goes to:
- *
- * - Igor Wiedler <igor@wiedler.ch>
- * - Jordi Boggiano <j.boggiano@seld.be>
- */
 
 namespace xrstf\Composer52;
 
@@ -29,21 +13,14 @@ use Composer\Util\Filesystem;
 
 class AutoloadGenerator extends BaseGenerator {
 
-	/**
-	 * @var bool
-	 */
+	
 	private $classMapAuthoritative = false;
 
 	public function __construct() {
-		// do nothing (but keep this constructor so we can build an instance without the need for an event dispatcher)
+		
 	}
 
-	/**
-	 * Whether or not generated autoloader considers the class map
-	 * authoritative.
-	 *
-	 * @param bool $classMapAuthoritative
-	 */
+	
 	public function setClassMapAuthoritative($classMapAuthoritative)
 	{
 		$this->classMapAuthoritative = (boolean) $classMapAuthoritative;
@@ -51,7 +28,7 @@ class AutoloadGenerator extends BaseGenerator {
 
 	public function dump(Config $config, InstalledRepositoryInterface $localRepo, PackageInterface $mainPackage, InstallationManager $installationManager, $targetDir, $scanPsr0Packages = false, $suffix = '') {
 		if ($this->classMapAuthoritative) {
-			// Force scanPsr0Packages when classmap is authoritative
+		
 			$scanPsr0Packages = true;
 		}
 
@@ -74,14 +51,14 @@ class AutoloadGenerator extends BaseGenerator {
 		$appBaseDirCode = $filesystem->findShortestPathCode($vendorPath, $basePath, true);
 		$appBaseDirCode = str_replace('__DIR__', '$vendorDir', $appBaseDirCode);
 
-		// add 5.2 compat
+		
 		$vendorPathCode            = str_replace('__DIR__', 'dirname(__FILE__)', $vendorPathCode);
 		$vendorPathToTargetDirCode = str_replace('__DIR__', 'dirname(__FILE__)', $vendorPathToTargetDirCode);
 
 		$packageMap = $this->buildPackageMap($installationManager, $mainPackage, $localRepo->getCanonicalPackages());
 		$autoloads = $this->parseAutoloads($packageMap, $mainPackage);
 
-		// add custom psr-0 autoloading if the root package has a target dir
+		
 		$targetDirLoader = null;
 		$mainAutoload = $mainPackage->getAutoload();
 		if ($mainPackage->getTargetDir() && !empty($mainAutoload['psr-0'])) {
@@ -121,8 +98,7 @@ EOF;
 		$filesCode = "";
 		$autoloads['files'] = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($autoloads['files']));
 		foreach ($autoloads['files'] as $functionFile) {
-			// don't include file if it is using PHP 5.3+ syntax
-			// https://bitbucket.org/xrstf/composer-php52/issue/4
+			
 			if ($this->isPHP53($functionFile)) {
 				$filesCode .= '//		require '.$this->getPathCode($filesystem, $basePath, $vendorPath, $functionFile)."; // disabled because of PHP 5.3 syntax\n";
 			}
@@ -140,8 +116,7 @@ EOF;
 		file_put_contents($vendorPath.'/autoload_52.php', $this->getAutoloadFile($vendorPathToTargetDirCode, $suffix));
 		file_put_contents($targetDir.'/autoload_real_52.php', $this->getAutoloadRealFile(true, (bool) $includePathFile, $targetDirLoader, $filesCode, $vendorPathCode, $appBaseDirCode, $suffix, $useGlobalIncludePath, $prependAutoloader));
 
-		// use stream_copy_to_stream instead of copy
-		// to work around https://bugs.php.net/bug.php?id=64634
+		
 		$sourceLoader = fopen(__DIR__.'/ClassLoader.php', 'r');
 		$targetLoader = fopen($targetDir.'/ClassLoader52.php', 'w+');
 		stream_copy_to_stream($sourceLoader, $targetLoader);
@@ -154,14 +129,14 @@ EOF;
 		$tokens = token_get_all(file_get_contents($file));
 		$php53  = array(T_DIR, T_GOTO, T_NAMESPACE, T_NS_C, T_NS_SEPARATOR, T_USE);
 
-		// PHP 5.4+
+		
 		if (defined('T_TRAIT')) {
 			$php53[] = T_TRAIT;
 			$php53[] = T_TRAIT_C;
 			$php53[] = T_TRAIT_C;
 		}
 
-		// PHP 5.5+
+		
 		if (defined('T_FINALLY')) {
 			$php53[] = T_FINALLY;
 			$php53[] = T_YIELD;
@@ -229,12 +204,7 @@ AUTOLOAD;
 	}
 
 	protected function getAutoloadRealFile($useClassMap, $useIncludePath, $targetDirLoader, $filesCode, $vendorPathCode, $appBaseDirCode, $suffix, $useGlobalIncludePath, $prependAutoloader, $staticPhpVersion = 70000) {
-		// TODO the class ComposerAutoloaderInit should be revert to a closure
-		// when APC has been fixed:
-		// - https://github.com/composer/composer/issues/959
-		// - https://bugs.php.net/bug.php?id=52144
-		// - https://bugs.php.net/bug.php?id=61576
-		// - https://bugs.php.net/bug.php?id=59298
+
 
 		if ($filesCode) {
 				$filesCode = "\n\n".rtrim($filesCode);
