@@ -1,20 +1,12 @@
 <?php
-/**
- * Default Widget Layout for front end.
- *
- * @package     RP
- * @subpackage  Layouts
- * @copyright   Copyright (c) 2017, Bogdan Preda
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since       3.0.0
- */
+
 
 ?>
 <ul>
 <?php
 foreach ( $results as $review ) :
 	$review_object         = new RP_Review_Model( $review['ID'] );
-	// phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
+	
 	$product_title_display = ( $instance['post_type'] == true ) ? $review_object->get_name() : get_the_title( $review['ID'] );
 	$product_image         = $review_object->get_small_thumbnail();
 
@@ -26,7 +18,7 @@ foreach ( $results as $review ) :
 
 	<?php
 	$rp_image = false;
-	// phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
+	
 	if ( $instance['show_image'] == true && ! empty( $product_image ) ) {
 		?>
 		<div class="cwp_rev_image rp-col">

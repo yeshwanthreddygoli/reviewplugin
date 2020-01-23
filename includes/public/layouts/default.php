@@ -1,14 +1,5 @@
 <?php
-/**
- *  RP front page layout.
- *
- * @package     RP
- * @subpackage  Layouts
- * @global      RP_Review_Model $review_object The inherited review object.
- * @copyright   Copyright (c) 2017, Bogdan Preda
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since       3.0.0
- */
+
 
 $price_raw = $review_object->get_price_raw();
 

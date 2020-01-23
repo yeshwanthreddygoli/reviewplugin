@@ -1,13 +1,5 @@
 <?php
-/**
- * RP Template 1.
- *
- * @package     RP
- * @subpackage  Layouts
- * @copyright   Copyright (c) 2017, Bogdan Popa
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since       3.0.0
- */
+
 ?>
 <div class="rp-template rp-template-1 <?php echo is_rtl() ? 'rtl' : ''; ?>">
 

@@ -1,33 +1,13 @@
 <?php
-/**
- * Class for functionalities related to Gutenberg.
- *
- * Defines the functions that need to be used for Gutenberg,
- * and REST router.
- *
- * @package    wp-product-review
- * @subpackage wp-product-review/includes/guteneberg
- * @author     Themeisle <friends@themeisle.com>
- */
+
 class RP_Gutenberg {
 
-	/**
-	 * A reference to an instance of this class.
-	 *
-	 * @var RP_Gutenberg The one RP_Gutenberg instance.
-	 */
 	private static $instance;
 
-	/**
-	 * WP Product Review version.
-	 *
-	 * @var string $version The current version of the plugin.
-	 */
+	
 	protected $version;
 
-	/**
-	 * Returns an instance of this class.
-	 */
+	
 	public static function get_instance() {
 		if ( null === self::$instance ) {
 			self::$instance = new RP_Gutenberg();
@@ -35,9 +15,7 @@ class RP_Gutenberg {
 		return self::$instance;
 	}
 
-	/**
-	 * Initializes the plugin by setting filters and administration functions.
-	 */
+	
 	private function __construct() {
 		$plugin        = new RP();
 		$this->version = $plugin->get_version();
@@ -50,9 +28,7 @@ class RP_Gutenberg {
 		add_filter( 'rest_rp_review_query', array( $this, 'post_meta_request_params' ), 99, 2 );
 	}
 
-	/**
-	 * Enqueue editor JavaScript and CSS
-	 */
+	
 	public function enqueue_gutenberg_scripts() {
 		if ( RP_CACHE_DISABLED ) {
 			$version = filemtime( RP_PATH . '/includes/gutenberg/build/sidebar.js' );
@@ -69,7 +45,7 @@ class RP_Gutenberg {
 		$model = new RP_Query_Model();
 		$length = $model->rp_get_option( 'cwppos_option_nr' );
 
-		// Enqueue the bundled block JS file
+		
 		wp_enqueue_script( 'rp-gutenberg-block-js', RP_URL . '/includes/gutenberg/build/sidebar.js', array( 'wp-i18n', 'wp-edit-post', 'wp-element', 'wp-editor', 'wp-components', 'wp-compose', 'wp-data', 'wp-plugins', 'wp-edit-post', 'wp-api' ), $version );
 
 		wp_localize_script(
@@ -82,13 +58,11 @@ class RP_Gutenberg {
 			)
 		);
 
-		// Enqueue editor block styles
+	
 		wp_enqueue_style( 'rp-gutenberg-block-css', RP_URL . '/includes/gutenberg/build/sidebar.css', '', $version );
 	}
 
-	/**
-	 * Hook server side rendering into render callback
-	 */
+	
 	public function update_posts_endpoints() {
 		register_rest_route(
 			'wp-product-review',
@@ -105,9 +79,7 @@ class RP_Gutenberg {
 		);
 	}
 
-	/**
-	 * Rest Callbackk Method
-	 */
+	
 	public function update_review_callback( $data ) {
 		if ( ! empty( $data['id'] ) ) {
 			$review = new RP_Review_Model( $data['id'] );
@@ -135,7 +107,7 @@ class RP_Gutenberg {
 				}
 
 				foreach ( $options as $key => $option ) {
-					// phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
+					
 					if ( $option['name'] === '' && $option['value'] == 0 ) {
 						unset( $options[ $key ] );
 					}
@@ -158,9 +130,7 @@ class RP_Gutenberg {
 		}
 	}
 
-	/**
-	 * Register Rest Field
-	 */
+	
 	public function register_endpoints() {
 		$args = array(
 			'public'   => true,
@@ -181,9 +151,7 @@ class RP_Gutenberg {
 		);
 	}
 
-	/**
-	 * Get Post Meta Fields
-	 */
+	
 	public function get_post_meta( $post ) {
 		$data = array();
 		$post_id = $post['id'];
@@ -212,9 +180,7 @@ class RP_Gutenberg {
 		return $data;
 	}
 
-	/**
-	 * Allow querying posts by meta in REST API
-	 */
+	
 	public function post_meta_request_params( $args, $request ) {
 		$args += array(
 			'meta_key'   => $request['meta_key'],

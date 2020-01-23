@@ -1,15 +1,5 @@
 <?php
-/**
- * Style One Widget Layout for front end.
- *
- * @package     RP
- * @subpackage  Layouts
- * @copyright   Copyright (c) 2017, Bogdan Preda
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since       3.0.0
- */
 
-// @codingStandardsIgnoreStart
 ?>
 <div class="rp-prodlist">
 	<?php
