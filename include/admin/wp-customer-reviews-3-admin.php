@@ -1152,12 +1152,7 @@ class WPCustomerReviewsAdmin3 extends WPCustomerReviews3
 						Customer Reviews allows your visitors to product reviews. 
 					</p>
 				</div>
-				<div class="inside bgblue">
-					Plugin Homepage: <a target="_blank" href="<?php echo $this->url; ?>?from=about"><?php echo $this->url; ?></a><br /><br />
-					Bug Report / Feature Request: <a target="_blank" href="mailto:wpcr@wpcr.freshdesk.com">wpcr@wpcr.freshdesk.com</a><br /><br />
-					Community Support Forum: <a target="_blank" href="<?php echo $this->support_link; ?>"><?php echo $this->support_link; ?></a><br /><br />
-					
-				</div>
+				
 			</div>
 
 			<div class="postbox">
