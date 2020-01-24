@@ -38,7 +38,7 @@ this._syncA=null,this._syncS=null,this.$element.off(".wpcr3_select"),this.$eleme
 
 (function($){
 	$(function() {
-		// begin: post meta fields
+	
 		var metabox = $('#wpcr3-meta-box');
 		
 		if (metabox.length) {
@@ -58,9 +58,7 @@ this._syncA=null,this._syncS=null,this.$element.off(".wpcr3_select"),this.$eleme
 			
 			wpcr3_format.change();
 		}
-		// end: post meta fields
-	
-		// begin: plugin settings fields
+		
 		var options = $('.wpcr3_myplugin_options');
 		if (options.length) {
 			$('.setting_wpcr3_option_custom_fields input.need_pro').click(function(e){
@@ -77,7 +75,7 @@ this._syncA=null,this._syncS=null,this.$element.off(".wpcr3_select"),this.$eleme
 				}
 			});
 		}
-		// end: plugin settings fields
+		
 	});
 })(jQuery);
 

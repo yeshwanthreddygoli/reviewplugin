@@ -212,7 +212,7 @@ wpcr3.init = function() {
 	if ($("body").on !== undefined) {
 		$(".wpcr3_respond_1").on("click", ".wpcr3_pagination .wpcr3_a", pagingCb);
 	} else {
-		// support older versions of jQuery
+		
 		$(".wpcr3_respond_1 .wpcr3_pagination .wpcr3_a").live("click", pagingCb);
 	}
 	
