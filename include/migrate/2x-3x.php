@@ -2,13 +2,13 @@
 function wpcr3_migrate_2x_3x(&$this2, $current_dbversion) {
 	global $wpdb;
 	
-	// if anything fails, RETURN FALSE
+	
 	
 	$old_2x_options = get_option("wpcr_options");
 	if ($old_2x_options === false) { return true; }
 	if (isset($old_2x_options['migrated_to_3x']) && $old_2x_options['migrated_to_3x'] == 1) { return true; }
 	
-	// update 2x options so it does not migrate again
+	
 	$old_2x_options['migrated_to_3x'] = 1;
 	update_option('wpcr_options', $old_2x_options);
 	
@@ -18,12 +18,12 @@ function wpcr3_migrate_2x_3x(&$this2, $current_dbversion) {
 	$this2->options['reviews_per_page'] = $old_2x_options['reviews_per_page'];
 	
 	if ($this2->options['activated'] == 0) {
-		$this2->options['activated'] = $old_2x_options['activate']; // "activate" -> "activated"
+		$this2->options['activated'] = $old_2x_options['activate']; 
 	}
 	
 	$new = new stdClass();
 	
-	$new->type = $old_2x_options['hreview_type']; // "business" or "product" - all 2x reviews had to be the same type
+	$new->type = $old_2x_options['hreview_type']; 
 	
 	$new->business_city = $old_2x_options['business_city'];
 	$new->business_country = $old_2x_options['business_country'];
@@ -35,60 +35,58 @@ function wpcr3_migrate_2x_3x(&$this2, $current_dbversion) {
 	$new->business_zip = $old_2x_options['business_zip'];
 	
 	$ask_fields = $old_2x_options['ask_fields'];
-	$new->ask_name = ($ask_fields["fname"] == 1); // boolean
-	$new->ask_email = ($ask_fields["femail"] == 1); // boolean
-	$new->ask_website = ($ask_fields["fwebsite"] == 1); // boolean
-	$new->ask_title = ($ask_fields["ftitle"] == 1); // boolean
+	$new->ask_name = ($ask_fields["fname"] == 1); 
+	$new->ask_email = ($ask_fields["femail"] == 1); 
+	$new->ask_website = ($ask_fields["fwebsite"] == 1); 
+	$new->ask_title = ($ask_fields["ftitle"] == 1); 
 	
 	$req_fields = $old_2x_options['require_fields'];
-	$new->req_name = ($req_fields["fname"] == 1); // boolean
-	$new->req_email = ($req_fields["femail"] == 1); // boolean
-	$new->req_website = ($req_fields["fwebsite"] == 1); // boolean
-	$new->req_title = ($req_fields["ftitle"] == 1); // boolean
+	$new->req_name = ($req_fields["fname"] == 1); 
+	$new->req_email = ($req_fields["femail"] == 1); 
+	$new->req_website = ($req_fields["fwebsite"] == 1); 
+	$new->req_title = ($req_fields["ftitle"] == 1); 
 	
 	$show_fields = $old_2x_options['show_fields'];
-	$new->show_name = ($show_fields["fname"] == 1); // boolean
-	$new->show_email = ($show_fields["femail"] == 1); // boolean
-	$new->show_website = ($show_fields["fwebsite"] == 1); // boolean
-	$new->show_title = ($show_fields["ftitle"] == 1); // boolean
+	$new->show_name = ($show_fields["fname"] == 1); 
+	$new->show_email = ($show_fields["femail"] == 1); 
+	$new->show_website = ($show_fields["fwebsite"] == 1); 
+	$new->show_title = ($show_fields["ftitle"] == 1); 
 	
 	$ask_custom = $old_2x_options['ask_custom'];
 	for ($i=0;$i<3;$i++) {
 		if (!isset($ask_custom[$i])) { $ask_custom[$i] = 0; }
 	}
-	$new->ask_custom_1 = ($ask_custom[0] == 1); // boolean
-	$new->ask_custom_2 = ($ask_custom[1] == 1); // boolean
-	$new->ask_custom_3 = ($ask_custom[2] == 1); // boolean
+	$new->ask_custom_1 = ($ask_custom[0] == 1); 
+	$new->ask_custom_2 = ($ask_custom[1] == 1); 
+	$new->ask_custom_3 = ($ask_custom[2] == 1); 
 	
 	$req_custom = $old_2x_options['require_custom'];
 	for ($i=0;$i<3;$i++) {
 		if (!isset($req_custom[$i])) { $req_custom[$i] = 0; }
 	}
-	$new->req_custom_1 = ($req_custom[0] == 1); // boolean
-	$new->req_custom_2 = ($req_custom[1] == 1); // boolean
-	$new->req_custom_3 = ($req_custom[2] == 1); // boolean
+	$new->req_custom_1 = ($req_custom[0] == 1); 
+	$new->req_custom_2 = ($req_custom[1] == 1); 
+	$new->req_custom_3 = ($req_custom[2] == 1); 
 	
 	$show_custom = $old_2x_options['show_custom'];
 	for ($i=0;$i<3;$i++) {
 		if (!isset($show_custom[$i])) { $show_custom[$i] = 0; }
 	}
-	$new->show_custom_1 = ($show_custom[0] == 1); // boolean
-	$new->show_custom_2 = ($show_custom[1] == 1); // boolean
-	$new->show_custom_3 = ($show_custom[2] == 1); // boolean
+	$new->show_custom_1 = ($show_custom[0] == 1); 
+	$new->show_custom_2 = ($show_custom[1] == 1); 
+	$new->show_custom_3 = ($show_custom[2] == 1); 
 	
 	$field_custom = $old_2x_options['field_custom'];
 	for ($i=0;$i<3;$i++) {
 		if (!isset($field_custom[$i])) { $field_custom[$i] = 0; }
 	}
-	$new->field_custom_1 = $field_custom[0]; // field label
-	$new->field_custom_2 = $field_custom[1]; // field label
-	$new->field_custom_3 = $field_custom[2]; // field label
-	
-	// begin: import reviews assigned to posts, update per-post wpcr meta
+	$new->field_custom_1 = $field_custom[0]; 
+	$new->field_custom_2 = $field_custom[1]; 
+	$new->field_custom_3 = $field_custom[2]; 
 	
 	$post_ids = array();
 	
-	// find posts that were automagically enabled with [WPCR_INSERT], but no checkbox enabled
+	
 	$queryOpts = array(
 		'nopaging' => true,
 		'ignore_sticky_posts ' => true,
@@ -100,7 +98,7 @@ function wpcr3_migrate_2x_3x(&$this2, $current_dbversion) {
 	$res = new WP_Query($queryOpts);
 	$post_ids = array_merge($post_ids, $res->posts);
 	
-	// find posts which are enabled via checkbox
+	
 	$queryOpts = array(
 		'nopaging' => true,
 		'ignore_sticky_posts ' => true,
@@ -118,8 +116,7 @@ function wpcr3_migrate_2x_3x(&$this2, $current_dbversion) {
 	$res = new WP_Query($queryOpts);
 	$post_ids = array_merge($post_ids, $res->posts);
 	
-	// begin: find posts which have 2x reviews associated with their post ID
-	// $reviews_2x will be re-used further down
+	
 	$reviews_2x = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}wpcreviews ORDER BY page_id ASC, id ASC");
 	$assigned_page_ids = array();
 	foreach ($reviews_2x as $review) {
@@ -139,7 +136,7 @@ function wpcr3_migrate_2x_3x(&$this2, $current_dbversion) {
 		$res = new WP_Query($queryOpts);		
 		$post_ids = array_merge($post_ids, $res->posts);
 	}
-	// end: find posts which have 2x reviews associated with their post ID
+	
 	
 	$post_ids = array_unique($post_ids);
 	foreach ($post_ids as $postid) {
@@ -153,7 +150,7 @@ function wpcr3_migrate_2x_3x(&$this2, $current_dbversion) {
 		
 		if (isset($meta->wpcr_migrated_to_3x)) { continue; }
 		
-		// update $postid with v3 options ( product vs business )
+
 		
 		update_post_meta($postid, 'wpcr_migrated_to_3x', '1');
 		update_post_meta($postid, 'wpcr3_enable', '1');
@@ -180,9 +177,7 @@ function wpcr3_migrate_2x_3x(&$this2, $current_dbversion) {
 			}
 		}
 	}
-	// end: import per-post plugin settings
 	
-	// begin: import reviews
 	foreach ($reviews_2x as $review) {
 		$status = 'publish';
 		if ($review->status == '0') { $status = 'pending'; }
@@ -223,9 +218,7 @@ function wpcr3_migrate_2x_3x(&$this2, $current_dbversion) {
 			}
 		}
 	}
-	// end: import reviews
-	
-	// update 3x options
+
 	update_option($this2->options_name, $this2->options);
 	
 	return true;
