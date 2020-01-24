@@ -1,10 +1,4 @@
-/*
-	WARNING: If you edit anything here, it will be overwritten with each plugin update and/or activation.
-	If you have the Pro version, you can edit this file via plugin settings without it being overwritten.
-	
-    You can also override any of these values in your theme CSS if you use !important or prepend with "body "
-    Example: body #wpcr3_respond_1 blockquote.description p { font-size:12px !important; font-weight:bold !important; }
-*/
+
 
 .wpcr3_in_content { margin-bottom:30px; }
 .wpcr3_in_content meta { display:none; }
