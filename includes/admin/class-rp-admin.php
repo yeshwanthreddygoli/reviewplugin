@@ -23,10 +23,11 @@ class RP_Admin {
 		switch ( $hook ) {
 			case 'toplevel_page_rp':
 				wp_enqueue_style( 'wp-color-picker' );
-				
+				wp_enqueue_style( $this->plugin_name . '-dashboard-css', RP_URL . '/assets/css/dashboard_styles.css', array(), $this->version );
+				wp_enqueue_style( $this->plugin_name . '-admin-css', RP_URL . '/assets/css/admin.css', array(), $this->version );
 				
 			case 'product-review_page_rp-support':
-				
+				wp_enqueue_style( $this->plugin_name . '-upsell-css', RP_URL . '/assets/css/support.css', array(), $this->version );
 				break;
 			case 'post.php':
 				
@@ -44,12 +45,12 @@ class RP_Admin {
 
 		switch ( $hook ) {
 			case 'toplevel_page_rp':
-				
+				wp_enqueue_script( $this->plugin_name . '-admin-js', RP_URL . '/assets/js/admin.js', array( 'jquery', 'wp-color-picker' ), $this->version );
 				break;
 			case 'post.php':
 				
 			case 'post-new.php':
-				
+				wp_enqueue_script( $this->plugin_name . '-post', RP_URL . '/assets/js/post.js', array( 'jquery-ui-accordion' ), $this->version );
 				break;
 		}
 
