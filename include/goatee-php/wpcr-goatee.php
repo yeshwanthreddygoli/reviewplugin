@@ -1,18 +1,5 @@
 <?php
-/*
-Goatee is a ideological sibling of Mustache Templates. 
-It shares the basic syntax of Mustache, but implements a few new awesome features 
-which make templating much easier and removes some features which are unneccessary.
 
-template tags documented at https://github.com/owenallenaz/Goatee
-
-Ported from Javascript to PHP by Aaron Queen (https://github.com/bompus)
-
-usage:
-$html = '<div>{{name}}</div>';
-$data = array('name' => 'Aaron');
-$filled = Goatee::fill($html, $data); // filled should contain '<div>Aaron</div>'
-*/
 
 class wpcr_Goatee {
 	private static function context($html) {
@@ -114,9 +101,9 @@ class wpcr_Goatee {
 			
 			if ($tag->type === '' || $tag->type === '%') {	
 				if ($myData_defined === false) {
-					// do nothing
+					
 				} else if ($myData_type === 'string' || $myData_type === 'integer' || $myData_type === 'double') {
-					// standard tags
+					
 					if ($tag->type === '') {
 						$returnArray[] = $myData;
 					} else if ($tag->type === '%') {
@@ -127,13 +114,13 @@ class wpcr_Goatee {
 						( ($myData_type === 'array') && isset($myData['template']) && isset($myData['data']) ) || 
 						( ($myData_type === 'object') && isset($myData->template) && isset($myData->data) )
 					) {
-					// passing a template and data structure
+					
 					
 					$myData_data = ($myData_type === 'array') ? $myData['data'] : $myData->data;
 					$myData_template = ($myData_type === 'array') ? $myData['template'] : $myData->template;
 					$myData_date_type = gettype($myData_data);
 					
-					// Is array loop over array
+				
 					if ($myData_date_type === 'array') {
 						foreach($myData_data as $idx2 => $val2) {
 							$returnArray[] = self::fill($myData_template, array($idx2 => $val2));
