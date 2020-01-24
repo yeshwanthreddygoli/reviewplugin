@@ -3,9 +3,7 @@
 		die("Access Denied");
 	}
 
-	// removes duplicate 3x reviews
-	// determines duplicate by name + email + reviewed page id + date
-	// keeps lowest page ids found
+	
 	if (!isset($_POST['wpcr3_confirm']) || $_POST['wpcr3_confirm'] !== 'YES') {
 		?>
 		This will attempt to de-dupe reviews. Duplicates are determined by comparing title + content + timestamp + reviewed page id<br /><br />
@@ -36,7 +34,7 @@
 			continue;
 		}
 		
-		// if we get here, we have a dupe
+		
 		print "Deleting duplicate review $post->ID $post->title<br />";
 		wp_delete_post($post->ID, true);
 	}

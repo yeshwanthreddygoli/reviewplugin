@@ -3,7 +3,7 @@
 		die("Access Denied");
 	}
 
-	// deletes all 3x reviews
+	
 	if (!isset($_POST['wpcr3_confirm']) || $_POST['wpcr3_confirm'] !== 'YES') {
 		?>
 		This will permanently delete all of your reviews.<br /><br />
