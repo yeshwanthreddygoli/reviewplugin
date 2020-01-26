@@ -398,7 +398,7 @@ class WPCustomerReviewsAdmin3 extends WPCustomerReviews3
 		$section_id = 'display_settings';
 		$this->my_add_settings_section($section_id, 'Display Settings', 'h3');
 		$this->my_add_setting($section_id, 'reviews_per_page', 'Reviews shown per page', '{ "type" : "text", "class" : "w40px", "default" : "10" }');
-		$this->my_add_setting($section_id, 'support_us', 'Support us', '{ "hint" : " '.$options_yesno.', "default" : "0" }');
+		
 	}
 	
 	
