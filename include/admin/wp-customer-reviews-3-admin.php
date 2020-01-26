@@ -1368,7 +1368,7 @@ class WPCustomerReviewsAdmin3 extends WPCustomerReviews3
 			
 			<h2 class="nav-tab-wrapper">
 				<a href="<?php echo $slug;?>&tab=about" class="nav-tab <?php echo $active_tab == 'about' ? 'nav-tab-active' : ''; ?>">About</a>
-				<a href="<?php echo $slug;?>&tab=how_to_use" class="nav-tab <?php echo $active_tab == 'how_to_use' ? 'nav-tab-active' : ''; ?>">How to use</a>
+				
 				<a href="<?php echo $slug;?>&tab=form_settings" class="nav-tab <?php echo $active_tab == 'form_settings' ? 'nav-tab-active' : ''; ?>">Review Form Settings</a>
 				<a href="<?php echo $slug;?>&tab=display_settings" class="nav-tab <?php echo $active_tab == 'display_settings' ? 'nav-tab-active' : ''; ?>">Display Settings</a>
 				
