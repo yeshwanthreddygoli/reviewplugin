@@ -1,4 +1,4 @@
-# Customer Reviews Plugin
+# Customer Reviews Plugin. 
   Plugin Name: Customer Reviews
   Plugin URI: https://www.linkedin.com/posts/yeshwanth-reddy-08a60b96_author-yeshwanth-reddy-goli-plugin-name-activity-6627035172539863040-wiQm
   Short Description: Allows your visitors to leave product reviews. Display star ratings in search results.
