@@ -1246,9 +1246,7 @@ class WPCustomerReviewsAdmin3 extends WPCustomerReviews3
 		$this->my_output_settings_section('display_settings');
 	}
 	
-	function tab_templates() {
-		echo '<br /><strong>This feature is available in the Pro version which will be announced soon.</strong>';
-	}
+	
 	
 	function tab_tools() {
 		$params = array("wpcr3_debug_code");
