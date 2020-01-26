@@ -1242,7 +1242,7 @@ class WPCustomerReviewsAdmin3 extends WPCustomerReviews3
 	}
 	
 	function tab_display_settings() {
-		echo '<br /><strong>Tip: You can completely customize the display of the review form and reviews on the Customize Templates / CSS tab.</strong>';
+		
 		$this->my_output_settings_section('display_settings');
 	}
 	
