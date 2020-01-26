@@ -972,7 +972,7 @@ class WPCustomerReviews3 {
 	
 		$defaults2 = $defaults1;
 		$defaults2['labels'] = array(
-			'name' => 'WP Customer Reviews',
+			'name' => 'Customer Reviews',
 			'singular_name' => 'Review',
 			'menu_name' => 'All Reviews',
 			'add_new_item' => 'Add New Customer Review',
