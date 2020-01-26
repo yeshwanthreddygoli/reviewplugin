@@ -1361,9 +1361,9 @@ class WPCustomerReviewsAdmin3 extends WPCustomerReviews3
 		
 		<div class="wrap <?php echo $this->prefix; ?>_myplugin_options">
 			<?php if ($this->pro) : ?>
-				<h2>WP Customer Reviews PRO - Settings</h2>
+				<h2>Customer Reviews - Settings</h2>
 			<?php else : ?>
-				<h2>WP Customer Reviews Lite - Settings <!--<div class="need_pro"><a class="boldBlue" target="_blank" href="<?php echo $this->prolink; ?>?from=h2_upgrade">Upgrade to Pro</a></div>--> </h2>
+				<h2>Customer Reviews - Settings <!--<div class="need_pro"><a class="boldBlue" target="_blank" href="<?php echo $this->prolink; ?>?from=h2_upgrade">Upgrade to Pro</a></div>--> </h2>
 			<?php endif; ?>
 			
 			<h2 class="nav-tab-wrapper">
